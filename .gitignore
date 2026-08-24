@@ -1,0 +1,23 @@
+/.env
+/storage/logs/*.log
+/storage/cache/*
+/storage/sqlite/*.sqlite
+/public_html/assets/uploads/*
+!/storage/logs/.gitkeep
+!/storage/cache/.gitkeep
+!/storage/sqlite/.gitkeep
+!/public_html/assets/uploads/.gitkeep
+/vendor/
+.DS_Store
+Thumbs.db
+*.local.php
+
+# Editor / tooling
+/.qodo/
+/.idea/
+/.vscode/
+*.swp
+
+# Generated backups (downloaded via the dashboard)
+/storage/backups/*
+!/storage/backups/.gitkeep

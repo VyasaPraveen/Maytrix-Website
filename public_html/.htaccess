@@ -1,0 +1,61 @@
+# Maytrix Education — public website (Apache / Hostinger)
+
+# ---- Force HTTPS (safe to keep on; only redirects once SSL is active) ----
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Uncomment the next two lines after SSL is installed to force HTTPS:
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    # Do not rewrite the admin app — it has its own front controller.
+    RewriteRule ^admin(/.*)?$ - [L]
+
+    # Serve existing files/directories directly (assets, uploads).
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Everything else → front controller.
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+# ---- Security headers (mirrors the app-level headers; belt & braces) ----
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), camera=(), microphone=(), payment=()"
+    Header always set X-XSS-Protection "0"
+    # HSTS — uncomment once HTTPS is confirmed working:
+    # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    Header always unset X-Powered-By
+    Header unset Server
+</IfModule>
+
+# ---- Block sensitive files ----
+<FilesMatch "(^\.|\.(env|ini|log|sqlite|sql|md|lock|json|dist|bak|old|sh)$)">
+    Require all denied
+</FilesMatch>
+
+# Explicitly protect .env and dotfiles
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# ---- Hardening ----
+Options -Indexes -ExecCGI -MultiViews
+ServerSignature Off
+
+# Disable HTTP methods we never use
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK|OPTIONS|CONNECT)$ [NC]
+    RewriteRule ^ - [F]
+</IfModule>
+
+DirectoryIndex index.php
+
+# Limit request body size (10 MB) to blunt abuse
+<IfModule mod_php.c>
+    php_value post_max_size 10M
+    php_value upload_max_filesize 8M
+</IfModule>
