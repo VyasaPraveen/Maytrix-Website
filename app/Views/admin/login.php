@@ -3,7 +3,7 @@ use App\Core\Csrf;
 ?>
 <div class="auth-wrap">
   <div class="auth-card">
-    <div class="brand"><span class="mark">M</span> Maytrix</div>
+    <div class="brand"><img src="<?= e(asset('img/logo.png')) ?>" alt="Maytrix Education" class="brand-img" width="600" height="217"></div>
     <div class="sub">Admin Dashboard — sign in to manage your website</div>
 
     <?php if (!empty($flash['error'])): ?><div class="alert alert-error"><?= e($flash['error']) ?></div><?php endif; ?>

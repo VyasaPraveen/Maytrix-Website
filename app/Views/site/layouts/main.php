@@ -17,6 +17,9 @@ $isActive = fn(string $key) => ($activeNav ?? '') === $key ? ' active' : '';
 <meta property="og:description" content="<?= e($metaDescription ?? '') ?>">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="<?= e($brand) ?>">
+<link rel="icon" type="image/png" sizes="32x32" href="<?= e(asset('img/favicon-32.png')) ?>">
+<link rel="icon" type="image/png" sizes="16x16" href="<?= e(asset('img/favicon-16.png')) ?>">
+<link rel="apple-touch-icon" href="<?= e(asset('img/apple-touch-icon.png')) ?>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="<?= e(asset('css/site.css')) ?>">
@@ -29,7 +32,9 @@ $isActive = fn(string $key) => ($activeNav ?? '') === $key ? ' active' : '';
 
 <header class="site">
   <div class="nav-row">
-    <a href="<?= e(base_url()) ?>" class="brand"><span class="mark">M</span> <?= e($brand) ?></a>
+    <a href="<?= e(base_url()) ?>" class="brand" aria-label="<?= e($brand) ?> — home">
+      <img src="<?= e(asset('img/logo.png')) ?>" alt="<?= e($brand) ?>" class="brand-logo" width="600" height="217">
+    </a>
     <nav class="primary" id="primaryNav">
       <a href="<?= e(base_url()) ?>" class="<?= trim($isActive('home')) ?>">Home</a>
       <a href="<?= e(base_url('about')) ?>" class="<?= trim($isActive('about')) ?>">About</a>
@@ -78,8 +83,8 @@ $isActive = fn(string $key) => ($activeNav ?? '') === $key ? ' active' : '';
 <footer class="site">
   <div class="wrap">
     <div>
-      <div class="foot-brand"><?= e($brand) ?></div>
-      <p style="font-size:13.5px;color:#B9B29B;max-width:280px;"><?= e($settings['footer_tagline'] ?? '') ?></p>
+      <img src="<?= e(asset('img/logo-white.png')) ?>" alt="<?= e($brand) ?>" class="foot-logo" width="600" height="217">
+      <p style="font-size:13.5px;color:#A9BAD4;max-width:280px;"><?= e($settings['footer_tagline'] ?? '') ?></p>
     </div>
     <div>
       <h4>Curricula</h4>
