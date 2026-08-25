@@ -3,12 +3,16 @@
 $pagesByCurric = [];
 foreach ($pages as $p) { $pagesByCurric[$p['curriculum_id']][] = $p; }
 ?>
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="<?= e(base_url()) ?>">Home</a><span>›</span> Curricula</div>
+    <span class="pill-eyebrow">Curricula</span>
+    <h1>IB · IB MYP · Cambridge IGCSE · Cambridge AS &amp; A Level</h1>
+    <p>Four curricula, taught by specialists who work inside them every week. Select a curriculum to see how classes are structured, or open the dedicated page for each subject.</p>
+  </div>
+</section>
 <section>
   <div class="wrap">
-    <span class="eyebrow">Curricula</span>
-    <h1 style="font-size:32px;">IB · IB MYP · Cambridge IGCSE · Cambridge AS &amp; A Level</h1>
-    <p style="max-width:640px;margin-bottom:36px;">Four curricula, taught by specialists who work inside them every week. Select a curriculum to see how classes are structured, or open the dedicated page for each subject.</p>
-
     <div class="tabbar" id="curriculaTabs">
       <?php foreach ($curricula as $i => $c): ?>
         <button type="button" class="<?= $i === 0 ? 'active' : '' ?>" data-tab="c<?= (int)$c['id'] ?>"><?= e($c['short_name'] ?: $c['name']) ?></button>

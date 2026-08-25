@@ -4,12 +4,15 @@ $preCurric = $prefill['curriculum_id'] ?? ($old['curriculum_id'] ?? '');
 $preSubject = $prefill['subject_id'] ?? ($old['subject_id'] ?? '');
 $preType = $prefill['class_type'] ?? ($old['class_type'] ?? '');
 ?>
+<section class="page-hero" style="text-align:center;">
+  <div class="wrap">
+    <span class="pill-eyebrow">Book a Consultation</span>
+    <h1>Let's find the right class for you</h1>
+    <p style="max-width:520px;margin-left:auto;margin-right:auto;">A quick 3-step form — curriculum, subject &amp; class type, then your details. Takes under a minute.</p>
+  </div>
+</section>
 <section>
   <div class="wrap">
-    <span class="eyebrow">Book a Consultation</span>
-    <h1 style="font-size:32px;text-align:center;">Let's find the right class for you</h1>
-    <p style="text-align:center;max-width:520px;margin:0 auto 40px;">A quick 3-step form — curriculum, subject &amp; class type, then your details. Takes under a minute.</p>
-
     <form method="post" action="<?= e(base_url('book')) ?>" class="wizard">
       <?= Csrf::field() ?>
       <div class="wizard-progress">

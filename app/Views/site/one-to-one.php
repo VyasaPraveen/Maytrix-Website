@@ -1,10 +1,14 @@
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="<?= e(base_url()) ?>">Home</a><span>›</span> Classes <span>›</span> 1-to-1</div>
+    <span class="pill-eyebrow">1-to-1 Classes</span>
+    <h1>One tutor. One student. Your exact syllabus.</h1>
+    <p>Fully personalised pacing, scheduled around your time zone — built for students who need focused, flexible support on a specific curriculum and subject. Available online (Zoom) or offline.</p>
+  </div>
+</section>
 <section>
   <div class="wrap">
-    <span class="eyebrow">1-to-1 Classes</span>
-    <h1 style="font-size:32px;">One tutor. One student. Your exact syllabus.</h1>
-    <p style="max-width:640px;">Fully personalised pacing, scheduled around your time zone — built for students who need focused, flexible support on a specific curriculum and subject. Available online (Zoom) or offline.</p>
-
-    <div class="grid-2" style="margin-top:40px;">
+    <div class="grid-2">
       <div class="card">
         <span class="tag">What's included</span>
         <ul>

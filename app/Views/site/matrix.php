@@ -9,12 +9,16 @@ foreach ($matrix as $p) {
     $subjectCols[$p['subject_code']] = $p['subject_name'];
 }
 ?>
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="<?= e(base_url()) ?>">Home</a><span>›</span> Courses</div>
+    <span class="pill-eyebrow">Courses / Programmes</span>
+    <h1>The Course Matrix</h1>
+    <p>Every curriculum, crossed with every subject we teach. Click any cell to open that dedicated page. Every combination is available as both 1-to-1 and Small-Group.</p>
+  </div>
+</section>
 <section>
   <div class="wrap">
-    <span class="eyebrow">Courses / Programmes</span>
-    <h1 style="font-size:32px;">The Course Matrix</h1>
-    <p style="max-width:640px;margin-bottom:36px;">Every curriculum, crossed with every subject we teach. Click any cell to open that dedicated page. Every combination is available as both 1-to-1 and Small-Group.</p>
-
     <table class="course-matrix">
       <thead>
         <tr>

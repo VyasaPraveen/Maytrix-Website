@@ -1,0 +1,113 @@
+<svg viewBox="0 0 580 540" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Live online Maths and Physics lesson">
+  <defs>
+    <linearGradient id="gAzure" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#41B4EE"/><stop offset="1" stop-color="#0A78BC"/>
+    </linearGradient>
+    <linearGradient id="gNavy" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#123163"/><stop offset="1" stop-color="#0A2452"/>
+    </linearGradient>
+    <linearGradient id="gCurve" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#0E9EE6"/><stop offset="1" stop-color="#41B4EE"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="26" flood-color="#0A2452" flood-opacity="0.18"/>
+    </filter>
+    <filter id="soft2" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#0A2452" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+
+  <!-- background blobs -->
+  <path d="M470 70c46 34 74 96 58 156-15 60-73 98-120 140-46 42-82 88-146 84-64-3-155-56-176-124-21-69 28-149 76-205C210 65 300 20 366 26c66 5 58 10 104 44Z" fill="#EAF6FD"/>
+  <circle cx="86" cy="140" r="54" fill="#DCEBFA"/>
+
+  <!-- dotted grid decoration -->
+  <g fill="#B9D4EE">
+    <circle cx="500" cy="360" r="4"/><circle cx="520" cy="360" r="4"/><circle cx="540" cy="360" r="4"/>
+    <circle cx="500" cy="380" r="4"/><circle cx="520" cy="380" r="4"/><circle cx="540" cy="380" r="4"/>
+    <circle cx="500" cy="400" r="4"/><circle cx="520" cy="400" r="4"/><circle cx="540" cy="400" r="4"/>
+  </g>
+  <g fill="#9BC4E8">
+    <circle cx="40" cy="330" r="4"/><circle cx="60" cy="330" r="4"/><circle cx="80" cy="330" r="4"/>
+    <circle cx="40" cy="350" r="4"/><circle cx="60" cy="350" r="4"/><circle cx="80" cy="350" r="4"/>
+  </g>
+
+  <!-- main lesson screen -->
+  <g filter="url(#soft)">
+    <rect x="118" y="96" width="330" height="248" rx="18" fill="#FFFFFF"/>
+  </g>
+  <rect x="118" y="96" width="330" height="44" rx="18" fill="url(#gNavy)"/>
+  <rect x="118" y="122" width="330" height="18" fill="url(#gNavy)"/>
+  <circle cx="140" cy="118" r="5" fill="#41B4EE"/><circle cx="158" cy="118" r="5" fill="#7FD0F5"/><circle cx="176" cy="118" r="5" fill="#ffffff" opacity="0.5"/>
+  <rect x="360" y="110" width="70" height="16" rx="8" fill="#0E9EE6"/>
+  <circle cx="371" cy="118" r="3.5" fill="#fff"/>
+  <text x="381" y="122" font-family="Segoe UI, sans-serif" font-size="10" font-weight="700" fill="#fff">LIVE</text>
+
+  <!-- coordinate plane + parabola -->
+  <g>
+    <line x1="150" y1="308" x2="416" y2="308" stroke="#DCE7F2" stroke-width="2"/>
+    <line x1="176" y1="164" x2="176" y2="320" stroke="#DCE7F2" stroke-width="2"/>
+    <g stroke="#EDF3FA" stroke-width="1.5">
+      <line x1="230" y1="164" x2="230" y2="308"/><line x1="284" y1="164" x2="284" y2="308"/>
+      <line x1="338" y1="164" x2="338" y2="308"/><line x1="392" y1="164" x2="392" y2="308"/>
+      <line x1="150" y1="260" x2="416" y2="260"/><line x1="150" y1="212" x2="416" y2="212"/>
+    </g>
+    <path d="M170 300 Q 258 130 404 292" stroke="url(#gCurve)" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <circle cx="258" cy="196" r="7" fill="#0A2452"/>
+    <circle cx="258" cy="196" r="7" fill="none" stroke="#fff" stroke-width="2.5"/>
+  </g>
+
+  <!-- equation chip on screen -->
+  <rect x="150" y="150" width="150" height="24" rx="8" fill="#EAF6FD"/>
+  <text x="162" y="167" font-family="'IBM Plex Mono', monospace" font-size="13" font-weight="600" fill="#0A78BC">y = 3x² − 5x + 7</text>
+
+  <!-- floating: Mathematics chip -->
+  <g filter="url(#soft2)">
+    <rect x="60" y="220" width="150" height="56" rx="14" fill="#fff"/>
+  </g>
+  <circle cx="90" cy="248" r="18" fill="#EAF6FD"/>
+  <text x="90" y="255" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="18" font-weight="700" fill="#0E9EE6">∑</text>
+  <text x="118" y="243" font-family="Segoe UI, sans-serif" font-size="13" font-weight="700" fill="#0A2452">Mathematics</text>
+  <text x="118" y="261" font-family="Segoe UI, sans-serif" font-size="11" fill="#66788E">IB · IGCSE · A Level</text>
+
+  <!-- floating: Physics chip -->
+  <g filter="url(#soft2)">
+    <rect x="356" y="300" width="150" height="56" rx="14" fill="#fff"/>
+  </g>
+  <circle cx="386" cy="328" r="18" fill="#0A2452"/>
+  <text x="386" y="334" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="16" font-weight="700" fill="#41B4EE">λ</text>
+  <text x="414" y="323" font-family="Segoe UI, sans-serif" font-size="13" font-weight="700" fill="#0A2452">Physics</text>
+  <text x="414" y="341" font-family="Segoe UI, sans-serif" font-size="11" fill="#66788E">Concepts that click</text>
+
+  <!-- floating rating badge -->
+  <g filter="url(#soft2)">
+    <rect x="386" y="150" width="120" height="46" rx="23" fill="#fff"/>
+  </g>
+  <path d="M410 165l3.4 6.9 7.6 1.1-5.5 5.4 1.3 7.6-6.8-3.6-6.8 3.6 1.3-7.6-5.5-5.4 7.6-1.1z" fill="#F5B301"/>
+  <text x="428" y="170" font-family="Segoe UI, sans-serif" font-size="14" font-weight="800" fill="#0A2452">4.9</text>
+  <text x="428" y="185" font-family="Segoe UI, sans-serif" font-size="10" fill="#66788E">parent rating</text>
+
+  <!-- graduation cap badge -->
+  <g filter="url(#soft2)">
+    <circle cx="98" cy="150" r="30" fill="url(#gAzure)"/>
+  </g>
+  <path d="M98 138l24 9-24 9-24-9z" fill="#fff"/>
+  <path d="M86 152v10c0 3 24 3 24 0v-10l-12 4.5z" fill="#fff" opacity="0.85"/>
+  <rect x="121" y="147" width="2.4" height="12" rx="1" fill="#fff"/>
+
+  <!-- ruler motif (echoes the logo) -->
+  <g transform="translate(430,392) rotate(12)">
+    <rect x="0" y="0" width="96" height="26" rx="5" fill="url(#gAzure)"/>
+    <g stroke="#fff" stroke-width="1.6" opacity="0.85">
+      <line x1="12" y1="0" x2="12" y2="9"/><line x1="24" y1="0" x2="24" y2="13"/>
+      <line x1="36" y1="0" x2="36" y2="9"/><line x1="48" y1="0" x2="48" y2="13"/>
+      <line x1="60" y1="0" x2="60" y2="9"/><line x1="72" y1="0" x2="72" y2="13"/>
+      <line x1="84" y1="0" x2="84" y2="9"/>
+    </g>
+  </g>
+
+  <!-- small orbiting dots -->
+  <circle cx="330" cy="70" r="6" fill="#0E9EE6"/>
+  <circle cx="60" cy="300" r="5" fill="#41B4EE"/>
+  <circle cx="470" cy="250" r="7" fill="#0A2452" opacity="0.7"/>
+</svg>

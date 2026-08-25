@@ -2,12 +2,16 @@
 $pagesBySubject = [];
 foreach ($pages as $p) { $pagesBySubject[$p['subject_id']][] = $p; }
 ?>
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="<?= e(base_url()) ?>">Home</a><span>›</span> Subjects</div>
+    <span class="pill-eyebrow">Subjects</span>
+    <h1>Mathematics &amp; Physics</h1>
+    <p>We teach two subjects, deeply, across four curricula — rather than many subjects shallowly.</p>
+  </div>
+</section>
 <section>
   <div class="wrap">
-    <span class="eyebrow">Subjects</span>
-    <h1 style="font-size:32px;">Mathematics &amp; Physics</h1>
-    <p style="max-width:640px;margin-bottom:36px;">We teach two subjects, deeply, across four curricula — rather than many subjects shallowly.</p>
-
     <div class="tabbar" id="subjectTabs">
       <?php foreach ($subjects as $i => $s): ?>
         <button type="button" class="<?= $i === 0 ? 'active' : '' ?>" data-tab="s<?= (int)$s['id'] ?>"><?= e($s['name']) ?></button>

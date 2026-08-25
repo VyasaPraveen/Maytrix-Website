@@ -1,12 +1,16 @@
 <?php /** @var array $batches */
 $curricClass = ['ib_dp' => 'c-ib', 'ib_myp' => 'c-ib', 'igcse' => 'c-igcse', 'alevel' => 'c-alevel'];
 ?>
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="<?= e(base_url()) ?>">Home</a><span>›</span> Classes <span>›</span> Small-Group</div>
+    <span class="pill-eyebrow">Small-Group Classes</span>
+    <h1>Learn alongside students at your level</h1>
+    <p>Cohorts capped at 6 students, matched by curriculum and level, so pacing stays personal even in a group. Seats update live as students enrol.</p>
+  </div>
+</section>
 <section>
   <div class="wrap">
-    <span class="eyebrow">Small-Group Classes</span>
-    <h1 style="font-size:32px;">Learn alongside students at your level</h1>
-    <p style="max-width:640px;margin-bottom:36px;">Cohorts capped at 6 students, matched by curriculum and level, so pacing stays personal even in a group. Seats update live as students enrol.</p>
-
     <?php if (empty($batches)): ?>
       <div class="card"><p style="margin:0;">No open batches right now. <a href="<?= e(base_url('book')) ?>" class="btn-ghost">Book a consultation →</a> and we'll place you in the next cohort.</p></div>
     <?php endif; ?>

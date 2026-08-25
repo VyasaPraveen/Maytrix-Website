@@ -13,10 +13,18 @@ $isActive = fn(string $key) => ($activeNav ?? '') === $key ? ' active' : '';
 <title><?= e($metaTitle ?? $brand) ?></title>
 <meta name="description" content="<?= e($metaDescription ?? '') ?>">
 <link rel="canonical" href="<?= e(base_url(ltrim($currentPath, '/'))) ?>">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#0A2452">
 <meta property="og:title" content="<?= e($metaTitle ?? $brand) ?>">
 <meta property="og:description" content="<?= e($metaDescription ?? '') ?>">
 <meta property="og:type" content="website">
+<meta property="og:url" content="<?= e(base_url(ltrim($currentPath, '/'))) ?>">
 <meta property="og:site_name" content="<?= e($brand) ?>">
+<meta property="og:image" content="<?= e(asset('img/logo@2x.png')) ?>">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<?= e($metaTitle ?? $brand) ?>">
+<meta name="twitter:description" content="<?= e($metaDescription ?? '') ?>">
+<meta name="twitter:image" content="<?= e(asset('img/logo@2x.png')) ?>">
 <link rel="icon" type="image/png" sizes="32x32" href="<?= e(asset('img/favicon-32.png')) ?>">
 <link rel="icon" type="image/png" sizes="16x16" href="<?= e(asset('img/favicon-16.png')) ?>">
 <link rel="apple-touch-icon" href="<?= e(asset('img/apple-touch-icon.png')) ?>">
@@ -27,6 +35,23 @@ $isActive = fn(string $key) => ($activeNav ?? '') === $key ? ' active' : '';
 <script async src="https://www.googletagmanager.com/gtag/js?id=<?= e($gaId) ?>"></script>
 <script nonce="<?= e(csp_nonce()) ?>">window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','<?= e($gaId) ?>');</script>
 <?php endif; ?>
+<script type="application/ld+json" nonce="<?= e(csp_nonce()) ?>"><?= json_encode([
+  '@context' => 'https://schema.org',
+  '@type'    => 'EducationalOrganization',
+  'name'     => $brand,
+  'url'      => base_url(),
+  'logo'     => asset('img/logo@2x.png'),
+  'description' => $settings['footer_tagline'] ?? 'Specialist online Mathematics & Physics tutoring for IB, IB MYP, Cambridge IGCSE and AS & A Level.',
+  'email'    => $settings['contact_email'] ?? null,
+  'telephone'=> $settings['contact_phone'] ?? null,
+  'sameAs'   => array_values(array_filter([
+      $settings['social_facebook'] ?? null,
+      $settings['social_instagram'] ?? null,
+      $settings['social_linkedin'] ?? null,
+  ])),
+  'areaServed' => 'Worldwide',
+  'knowsAbout' => ['Mathematics', 'Physics', 'IB Diploma', 'Cambridge IGCSE', 'A Level'],
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
 </head>
 <body>
 

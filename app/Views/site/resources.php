@@ -1,10 +1,14 @@
 <?php /** @var array $posts */ ?>
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="<?= e(base_url()) ?>">Home</a><span>›</span> Resources</div>
+    <span class="pill-eyebrow">Resources / Blog</span>
+    <h1>Notes from the tutoring room</h1>
+    <p>Short, syllabus-specific guidance from our tutors. New articles added regularly.</p>
+  </div>
+</section>
 <section>
   <div class="wrap">
-    <span class="eyebrow">Resources / Blog</span>
-    <h1 style="font-size:32px;">Notes from the tutoring room</h1>
-    <p style="max-width:640px;margin-bottom:36px;">Short, syllabus-specific guidance from our tutors. New articles added regularly.</p>
-
     <?php if (empty($posts)): ?>
       <div class="card"><p style="margin:0;">Articles are on the way — check back soon.</p></div>
     <?php else: ?>

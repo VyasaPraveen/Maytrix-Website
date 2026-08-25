@@ -1,0 +1,50 @@
+<svg viewBox="0 0 520 480" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Grade improvement results">
+  <defs>
+    <linearGradient id="rAzure" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#41B4EE"/><stop offset="1" stop-color="#0A78BC"/></linearGradient>
+    <linearGradient id="rNavy" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#123163"/><stop offset="1" stop-color="#0A2452"/></linearGradient>
+    <linearGradient id="rBar" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#0A78BC"/><stop offset="1" stop-color="#41B4EE"/></linearGradient>
+    <filter id="rsoft" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#0A2452" flood-opacity="0.18"/></filter>
+    <filter id="rsoft2" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="9" stdDeviation="13" flood-color="#0A2452" flood-opacity="0.16"/></filter>
+  </defs>
+
+  <path d="M60 120C110 60 210 40 300 60c90 20 170 70 156 168-14 98-96 120-190 150S60 470 44 360 10 180 60 120Z" fill="#EAF6FD"/>
+  <g fill="#B9D4EE"><circle cx="450" cy="120" r="4"/><circle cx="468" cy="120" r="4"/><circle cx="450" cy="138" r="4"/><circle cx="468" cy="138" r="4"/></g>
+
+  <!-- main growth card -->
+  <g filter="url(#rsoft)"><rect x="90" y="120" width="300" height="240" rx="18" fill="#fff"/></g>
+  <text x="116" y="160" font-family="Segoe UI, sans-serif" font-size="15" font-weight="700" fill="#0A2452">Grade progression</text>
+  <text x="116" y="180" font-family="'IBM Plex Mono',monospace" font-size="11" fill="#66788E">first term → exam</text>
+
+  <!-- bars -->
+  <g>
+    <rect x="128" y="290" width="34" height="40" rx="6" fill="#DCEBFA"/>
+    <rect x="180" y="264" width="34" height="66" rx="6" fill="#BEDDF6"/>
+    <rect x="232" y="230" width="34" height="100" rx="6" fill="url(#rBar)"/>
+    <rect x="284" y="196" width="34" height="134" rx="6" fill="url(#rBar)"/>
+    <rect x="336" y="210" width="4" height="120" rx="2" fill="#EDF3FA"/>
+  </g>
+  <!-- trend line -->
+  <path d="M145 300 L197 276 L249 244 L301 212" stroke="#0A2452" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="1 0"/>
+  <circle cx="301" cy="212" r="6" fill="#0A2452"/><circle cx="301" cy="212" r="6" fill="none" stroke="#fff" stroke-width="2"/>
+
+  <!-- A* badge -->
+  <g filter="url(#rsoft2)"><circle cx="360" cy="150" r="34" fill="url(#rAzure)"/></g>
+  <text x="360" y="160" text-anchor="middle" font-family="'Source Serif 4', Georgia, serif" font-size="24" font-weight="700" fill="#fff">A*</text>
+
+  <!-- floating "+1.8 grades" pill -->
+  <g filter="url(#rsoft2)"><rect x="60" y="330" width="150" height="58" rx="14" fill="#fff"/></g>
+  <circle cx="90" cy="359" r="18" fill="#EAF6FD"/>
+  <path d="M83 363l5-6 4 4 6-8" stroke="#0E9EE6" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="116" y="354" font-family="Segoe UI, sans-serif" font-size="15" font-weight="800" fill="#0A2452">+1.8</text>
+  <text x="116" y="371" font-family="Segoe UI, sans-serif" font-size="11" fill="#66788E">avg. grade bands</text>
+
+  <!-- checklist pill -->
+  <g filter="url(#rsoft2)"><rect x="320" y="330" width="150" height="58" rx="14" fill="#fff"/></g>
+  <circle cx="350" cy="359" r="18" fill="#0A2452"/>
+  <path d="M343 359l5 5 9-10" stroke="#41B4EE" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="376" y="354" font-family="Segoe UI, sans-serif" font-size="13" font-weight="700" fill="#0A2452">Mark-scheme</text>
+  <text x="376" y="371" font-family="Segoe UI, sans-serif" font-size="11" fill="#66788E">trained tutors</text>
+
+  <circle cx="70" cy="90" r="6" fill="#0E9EE6"/>
+  <circle cx="430" cy="300" r="7" fill="#41B4EE"/>
+</svg>

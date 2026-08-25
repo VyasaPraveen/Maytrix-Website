@@ -1,11 +1,17 @@
 <?php /** @var array $settings @var array $errors @var array $old */
 use App\Core\Csrf;
 ?>
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumbs"><a href="<?= e(base_url()) ?>">Home</a><span>›</span> Contact</div>
+    <span class="pill-eyebrow">Contact</span>
+    <h1>Talk to us</h1>
+    <p>Have a question before booking a consultation? Send us a note and we'll reply within one business day.</p>
+  </div>
+</section>
 <section>
   <div class="wrap">
-    <span class="eyebrow">Contact</span>
-    <h1 style="font-size:32px;">Talk to us</h1>
-    <div class="grid-2" style="margin-top:30px;align-items:start;">
+    <div class="grid-2" style="align-items:start;">
       <div>
         <p>Have a question before booking a consultation? Send us a note and we'll get back to you within one business day.</p>
         <div class="card" style="margin-top:20px;">

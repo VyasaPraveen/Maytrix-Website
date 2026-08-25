@@ -2,16 +2,19 @@
 $badges = $page['badges'] ?? [];
 $topics = $page['topics'] ?? [];
 ?>
-<section>
-  <div class="wrap" style="max-width:760px;">
-    <a href="<?= e(base_url('programmes')) ?>" class="btn-ghost" style="font-size:12.5px;display:inline-block;">← Back to Course Matrix</a>
-    <span class="eyebrow" style="margin-top:18px;display:block;"><?= e($page['eyebrow'] ?? '') ?></span>
-    <h1 style="font-size:32px;"><?= e($page['title']) ?></h1>
-    <div class="subjects" style="margin-bottom:20px;">
+<section class="page-hero">
+  <div class="wrap" style="max-width:820px;">
+    <div class="crumbs"><a href="<?= e(base_url()) ?>">Home</a><span>›</span> <a href="<?= e(base_url('programmes')) ?>">Courses</a><span>›</span> <?= e($page['title']) ?></div>
+    <?php if (!empty($page['eyebrow'])): ?><span class="pill-eyebrow"><?= e($page['eyebrow']) ?></span><?php endif; ?>
+    <h1><?= e($page['title']) ?></h1>
+    <div class="subjects" style="margin-bottom:18px;">
       <?php foreach ($badges as $b): ?><span><?= e($b) ?></span><?php endforeach; ?>
     </div>
     <p style="font-size:17px;"><?= e($page['intro'] ?? '') ?></p>
-
+  </div>
+</section>
+<section>
+  <div class="wrap" style="max-width:820px;">
     <?php if (!empty($page['body_html'])): ?>
       <div class="content-body"><?= $page['body_html'] ?></div>
     <?php endif; ?>
@@ -38,3 +41,20 @@ $topics = $page['topics'] ?? [];
     </div>
   </div>
 </section>
+<script type="application/ld+json" nonce="<?= e(csp_nonce()) ?>"><?= json_encode([
+  '@context' => 'https://schema.org',
+  '@type'    => 'Course',
+  'name'     => $page['title'],
+  'description' => $page['seo_description'] ?: ($page['intro'] ?? ''),
+  'url'      => base_url('curriculum/' . $page['slug']),
+  'provider' => [
+    '@type' => 'EducationalOrganization',
+    'name'  => $settings['brand_name'] ?? 'Maytrix Education',
+    'sameAs'=> base_url(),
+  ],
+  'hasCourseInstance' => [
+    '@type' => 'CourseInstance',
+    'courseMode' => 'online',
+    'courseWorkload' => 'PT2H',
+  ],
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
