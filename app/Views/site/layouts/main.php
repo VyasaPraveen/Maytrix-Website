@@ -13,7 +13,7 @@ $isActive = fn(string $key) => ($activeNav ?? '') === $key ? ' active' : '';
 <title><?= e($metaTitle ?? $brand) ?></title>
 <meta name="description" content="<?= e($metaDescription ?? '') ?>">
 <link rel="canonical" href="<?= e(base_url(ltrim($currentPath, '/'))) ?>">
-<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="robots" content="<?= e($metaRobots ?? 'index,follow,max-image-preview:large') ?>">
 <meta name="theme-color" content="#0A2452">
 <meta property="og:title" content="<?= e($metaTitle ?? $brand) ?>">
 <meta property="og:description" content="<?= e($metaDescription ?? '') ?>">
@@ -29,21 +29,25 @@ $isActive = fn(string $key) => ($activeNav ?? '') === $key ? ' active' : '';
 <link rel="icon" type="image/png" sizes="16x16" href="<?= e(asset('img/favicon-16.png')) ?>">
 <link rel="apple-touch-icon" href="<?= e(asset('img/apple-touch-icon.png')) ?>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="<?= e(asset('css/site.css')) ?>">
 <?php if ($gaId): ?>
 <script async src="https://www.googletagmanager.com/gtag/js?id=<?= e($gaId) ?>"></script>
 <script nonce="<?= e(csp_nonce()) ?>">window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','<?= e($gaId) ?>');</script>
 <?php endif; ?>
-<script type="application/ld+json" nonce="<?= e(csp_nonce()) ?>"><?= json_encode([
+<?php
+$orgLd = [
   '@context' => 'https://schema.org',
   '@type'    => 'EducationalOrganization',
+  '@id'      => base_url('#organization'),
   'name'     => $brand,
   'url'      => base_url(),
   'logo'     => asset('img/logo@2x.png'),
-  'description' => $settings['footer_tagline'] ?? 'Specialist online Mathematics & Physics tutoring for IB, IB MYP, Cambridge IGCSE and AS & A Level.',
+  'description' => $settings['footer_tagline'] ?? 'Specialist online Mathematics & Physics tutoring for IB, IBMYP, Cambridge IGCSE and AS & A Level.',
   'email'    => $settings['contact_email'] ?? null,
   'telephone'=> $settings['contact_phone'] ?? null,
+  'address'  => ['@type' => 'PostalAddress', 'addressCountry' => 'IN'],
   'sameAs'   => array_values(array_filter([
       $settings['social_facebook'] ?? null,
       $settings['social_instagram'] ?? null,
@@ -51,14 +55,18 @@ $isActive = fn(string $key) => ($activeNav ?? '') === $key ? ' active' : '';
   ])),
   'areaServed' => 'Worldwide',
   'knowsAbout' => ['Mathematics', 'Physics', 'IB Diploma', 'Cambridge IGCSE', 'A Level'],
-], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
+];
+// Drop null / empty values so the emitted entity is clean (no telephone:null, sameAs:[]).
+$orgLd = array_filter($orgLd, fn($v) => $v !== null && $v !== '' && $v !== []);
+?>
+<script type="application/ld+json" nonce="<?= e(csp_nonce()) ?>"><?= json_encode($orgLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?></script>
 </head>
 <body>
 
 <header class="site">
   <div class="nav-row">
     <a href="<?= e(base_url()) ?>" class="brand" aria-label="<?= e($brand) ?> — home">
-      <img src="<?= e(asset('img/logo.png')) ?>" alt="<?= e($brand) ?>" class="brand-logo" width="600" height="217">
+      <img src="<?= e(asset('img/logo.png')) ?>" alt="<?= e($brand) ?>" class="brand-logo" width="360" height="130">
     </a>
     <nav class="primary" id="primaryNav">
       <a href="<?= e(base_url()) ?>" class="<?= trim($isActive('home')) ?>">Home</a>
@@ -67,7 +75,7 @@ $isActive = fn(string $key) => ($activeNav ?? '') === $key ? ' active' : '';
       <div class="dropdown" data-dropdown>
         <button type="button" aria-expanded="false" class="<?= trim($isActive('programmes')) ?>">Programmes <span class="chev"></span></button>
         <div class="dropdown-menu">
-          <a href="<?= e(base_url('curricula')) ?>">Curricula<small>IB · IB MYP · IGCSE · A Level</small></a>
+          <a href="<?= e(base_url('curricula')) ?>">Curricula<small>IB · IBMYP · IGCSE · A Level</small></a>
           <a href="<?= e(base_url('subjects')) ?>">Subjects<small>Mathematics · Physics</small></a>
           <a href="<?= e(base_url('programmes')) ?>">Course Matrix<small>All curriculum × subject pages</small></a>
         </div>
@@ -85,9 +93,10 @@ $isActive = fn(string $key) => ($activeNav ?? '') === $key ? ' active' : '';
       <a href="<?= e(base_url('contact')) ?>" class="<?= trim($isActive('contact')) ?>">Contact</a>
     </nav>
     <div class="header-actions">
-      <a href="<?= e(base_url('book')) ?>" class="btn btn-primary btn-sm">
+      <a href="<?= e(base_url('book')) ?>" class="btn btn-primary btn-sm header-book">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 3v3M16 3v3"/></svg>
-        Book a Consultation
+        <span class="lbl-full">Book a Consultation</span>
+        <span class="lbl-short">Book Now</span>
       </a>
       <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu"><span></span></button>
     </div>
@@ -108,7 +117,7 @@ $isActive = fn(string $key) => ($activeNav ?? '') === $key ? ' active' : '';
 <footer class="site">
   <div class="wrap">
     <div>
-      <img src="<?= e(asset('img/logo-white.png')) ?>" alt="<?= e($brand) ?>" class="foot-logo" width="600" height="217">
+      <img src="<?= e(asset('img/logo-white.png')) ?>" alt="<?= e($brand) ?>" class="foot-logo" width="360" height="130" loading="lazy">
       <p style="font-size:13.5px;color:#A9BAD4;max-width:280px;"><?= e($settings['footer_tagline'] ?? '') ?></p>
     </div>
     <div>

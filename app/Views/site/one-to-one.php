@@ -1,9 +1,9 @@
 <section class="page-hero">
   <div class="wrap">
     <div class="crumbs"><a href="<?= e(base_url()) ?>">Home</a><span>›</span> Classes <span>›</span> 1-to-1</div>
-    <span class="pill-eyebrow">1-to-1 Classes</span>
-    <h1>One tutor. One student. Your exact syllabus.</h1>
-    <p>Fully personalised pacing, scheduled around your time zone — built for students who need focused, flexible support on a specific curriculum and subject. Available online (Zoom) or offline.</p>
+    <span class="pill-eyebrow"><?= e(block('pages.oneToOne.eyebrow')) ?></span>
+    <h1><?= e(block('pages.oneToOne.title')) ?></h1>
+    <p><?= e(block('pages.oneToOne.intro')) ?></p>
   </div>
 </section>
 <section>

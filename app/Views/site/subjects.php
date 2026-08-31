@@ -5,9 +5,9 @@ foreach ($pages as $p) { $pagesBySubject[$p['subject_id']][] = $p; }
 <section class="page-hero">
   <div class="wrap">
     <div class="crumbs"><a href="<?= e(base_url()) ?>">Home</a><span>›</span> Subjects</div>
-    <span class="pill-eyebrow">Subjects</span>
-    <h1>Mathematics &amp; Physics</h1>
-    <p>We teach two subjects, deeply, across four curricula — rather than many subjects shallowly.</p>
+    <span class="pill-eyebrow"><?= e(block('pages.subjects.eyebrow')) ?></span>
+    <h1><?= e(block('pages.subjects.title')) ?></h1>
+    <p><?= e(block('pages.subjects.intro')) ?></p>
   </div>
 </section>
 <section>

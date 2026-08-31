@@ -2,7 +2,7 @@
 
 <p align="center">
   <em>International online tutoring platform for</em><br>
-  <strong>IB · IB MYP · Cambridge IGCSE · Cambridge AS &amp; A Level — Mathematics &amp; Physics</strong>
+  <strong>IB · IBMYP · Cambridge IGCSE · Cambridge AS &amp; A Level — Mathematics &amp; Physics</strong>
 </p>
 
 <p align="center">

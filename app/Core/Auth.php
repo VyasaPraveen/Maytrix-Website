@@ -86,4 +86,28 @@ final class Auth
             redirect($loginUrl);
         }
     }
+
+    /** Current admin's role ('admin' | 'editor'), or null when signed out. */
+    public static function role(): ?string
+    {
+        $user = self::user();
+        return $user['role'] ?? null;
+    }
+
+    public static function isAdmin(): bool
+    {
+        return self::role() === 'admin';
+    }
+
+    /**
+     * Guard: only full "admin" role may proceed. Editors are redirected with a
+     * message. Assumes authentication was already enforced by require().
+     */
+    public static function requireRole(string $role, string $redirectUrl): void
+    {
+        if (self::role() !== $role) {
+            Flash::error('You do not have permission to access that area.');
+            redirect($redirectUrl);
+        }
+    }
 }

@@ -34,27 +34,50 @@ $topics = $page['topics'] ?? [];
     <div class="card" style="margin-top:20px;">
       <span class="tag">Available as</span>
       <p style="margin-top:10px;font-size:14.5px;">1-to-1 Classes and Small-Group Classes — both bookable from this page.</p>
-      <div class="hero-ctas" style="margin-top:6px;">
+      <div class="hero-ctas cta-row-2" style="margin-top:6px;">
         <a href="<?= e(base_url('book?curriculum_id=' . $page['curriculum_id'] . '&subject_id=' . $page['subject_id'])) ?>" class="btn btn-primary btn-sm">Book a Free Consultation</a>
         <a href="<?= e(base_url('small-group')) ?>" class="btn btn-outline btn-sm">See Small-Group Batches</a>
       </div>
     </div>
   </div>
 </section>
-<script type="application/ld+json" nonce="<?= e(csp_nonce()) ?>"><?= json_encode([
+<?php
+$ldFlags = JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT;
+$courseLd = [
   '@context' => 'https://schema.org',
   '@type'    => 'Course',
   'name'     => $page['title'],
   'description' => $page['seo_description'] ?: ($page['intro'] ?? ''),
   'url'      => base_url('curriculum/' . $page['slug']),
+  'image'    => asset('img/logo@2x.png'),
   'provider' => [
     '@type' => 'EducationalOrganization',
     'name'  => $settings['brand_name'] ?? 'Maytrix Education',
-    'sameAs'=> base_url(),
+    'url'   => base_url(),
+  ],
+  'offers' => [
+    '@type' => 'Offer',
+    'category' => 'Free consultation',
+    'price' => '0',
+    'priceCurrency' => 'USD',
+    'availability' => 'https://schema.org/InStock',
+    'url' => base_url('book'),
   ],
   'hasCourseInstance' => [
     '@type' => 'CourseInstance',
     'courseMode' => 'online',
     'courseWorkload' => 'PT2H',
   ],
-], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?></script>
+];
+$breadcrumbLd = [
+  '@context' => 'https://schema.org',
+  '@type'    => 'BreadcrumbList',
+  'itemListElement' => [
+    ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => base_url()],
+    ['@type' => 'ListItem', 'position' => 2, 'name' => 'Courses', 'item' => base_url('programmes')],
+    ['@type' => 'ListItem', 'position' => 3, 'name' => $page['title'], 'item' => base_url('curriculum/' . $page['slug'])],
+  ],
+];
+?>
+<script type="application/ld+json" nonce="<?= e(csp_nonce()) ?>"><?= json_encode($courseLd, $ldFlags) ?></script>
+<script type="application/ld+json" nonce="<?= e(csp_nonce()) ?>"><?= json_encode($breadcrumbLd, $ldFlags) ?></script>

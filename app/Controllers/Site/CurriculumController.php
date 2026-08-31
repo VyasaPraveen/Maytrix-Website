@@ -17,7 +17,7 @@ final class CurriculumController extends SiteController
             'activeNav' => 'programmes',
             'curricula' => (new Curriculum())->active(),
             'pages'     => (new CurriculumPage())->published(),
-            'metaTitle' => 'Curricula — IB · IB MYP · Cambridge IGCSE · AS & A Level | Maytrix Education',
+            'metaTitle' => 'Curricula — IB · IBMYP · Cambridge IGCSE · AS & A Level | Maytrix Education',
             'metaDescription' => 'Four international curricula, taught by specialists who work inside them every week.',
         ]);
     }

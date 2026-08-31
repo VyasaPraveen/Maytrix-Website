@@ -2,9 +2,9 @@
 <section class="page-hero">
   <div class="wrap">
     <div class="crumbs"><a href="<?= e(base_url()) ?>">Home</a><span>›</span> Resources</div>
-    <span class="pill-eyebrow">Resources / Blog</span>
-    <h1>Notes from the tutoring room</h1>
-    <p>Short, syllabus-specific guidance from our tutors. New articles added regularly.</p>
+    <span class="pill-eyebrow"><?= e(block('pages.resources.eyebrow')) ?></span>
+    <h1><?= e(block('pages.resources.title')) ?></h1>
+    <p><?= e(block('pages.resources.intro')) ?></p>
   </div>
 </section>
 <section>

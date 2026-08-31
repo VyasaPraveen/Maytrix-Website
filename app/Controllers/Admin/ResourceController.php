@@ -223,6 +223,11 @@ abstract class ResourceController extends AdminController
             if ($type === 'slug' && empty($data[$name]) && !empty($f['from']) && !empty($data[$f['from']])) {
                 $data[$name] = str_slug((string) $data[$f['from']]);
             }
+            // Rich-text fields are rendered unescaped on the public site — clean
+            // them through an allowlist sanitizer before persisting.
+            if ($type === 'richtext') {
+                $data[$name] = \App\Support\HtmlSanitizer::clean($data[$name] ?? '');
+            }
             // JSON fields: accept a JSON string; store as-is (model encodes if array).
             if ($type === 'json') {
                 $decoded = json_decode((string) $data[$name], true);

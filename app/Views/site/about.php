@@ -14,16 +14,16 @@
 
     <div class="grid-3" style="margin-top:40px;">
       <div class="card">
-        <h3 style="font-size:17px;">Syllabus-first</h3>
-        <p style="font-size:14px;">Every tutor teaches to the specific board and paper structure a student is sitting — not a generic curriculum.</p>
+        <h3 style="font-size:17px;"><?= e(block('about.card1.title')) ?></h3>
+        <p style="font-size:14px;"><?= e(block('about.card1.body')) ?></p>
       </div>
       <div class="card">
-        <h3 style="font-size:17px;">Small by design</h3>
-        <p style="font-size:14px;">Group classes are capped at 6 students so every question still gets answered live.</p>
+        <h3 style="font-size:17px;"><?= e(block('about.card2.title')) ?></h3>
+        <p style="font-size:14px;"><?= e(block('about.card2.body')) ?></p>
       </div>
       <div class="card">
-        <h3 style="font-size:17px;">Built to grow with you</h3>
-        <p style="font-size:14px;">Starting as a focused tutoring brand, with a student portal and progress tracking planned as the next step.</p>
+        <h3 style="font-size:17px;"><?= e(block('about.card3.title')) ?></h3>
+        <p style="font-size:14px;"><?= e(block('about.card3.body')) ?></p>
       </div>
     </div>
   </div>

@@ -4,9 +4,9 @@ use App\Core\Csrf;
 <section class="page-hero">
   <div class="wrap">
     <div class="crumbs"><a href="<?= e(base_url()) ?>">Home</a><span>›</span> Contact</div>
-    <span class="pill-eyebrow">Contact</span>
-    <h1>Talk to us</h1>
-    <p>Have a question before booking a consultation? Send us a note and we'll reply within one business day.</p>
+    <span class="pill-eyebrow"><?= e(block('pages.contact.eyebrow')) ?></span>
+    <h1><?= e(block('pages.contact.title')) ?></h1>
+    <p><?= e(block('pages.contact.intro')) ?></p>
   </div>
 </section>
 <section>
@@ -26,28 +26,28 @@ use App\Core\Csrf;
         <?= Csrf::field() ?>
         <div class="field-row">
           <div class="field">
-            <label>Full name</label>
-            <input type="text" name="name" value="<?= e($old['name'] ?? '') ?>" class="<?= isset($errors['name']) ? 'invalid' : '' ?>" required>
+            <label for="cf-name">Full name</label>
+            <input id="cf-name" type="text" name="name" value="<?= e($old['name'] ?? '') ?>" class="<?= isset($errors['name']) ? 'invalid' : '' ?>" required>
             <?php if (isset($errors['name'])): ?><span class="err"><?= e($errors['name']) ?></span><?php endif; ?>
           </div>
           <div class="field">
-            <label>Email</label>
-            <input type="email" name="email" value="<?= e($old['email'] ?? '') ?>" class="<?= isset($errors['email']) ? 'invalid' : '' ?>" required>
+            <label for="cf-email">Email</label>
+            <input id="cf-email" type="email" name="email" value="<?= e($old['email'] ?? '') ?>" class="<?= isset($errors['email']) ? 'invalid' : '' ?>" required>
             <?php if (isset($errors['email'])): ?><span class="err"><?= e($errors['email']) ?></span><?php endif; ?>
           </div>
         </div>
         <div class="field-row">
-          <div class="field"><label>Country</label><input type="text" name="country" value="<?= e($old['country'] ?? '') ?>" placeholder="e.g. UAE, UK, India"></div>
-          <div class="field"><label>Curriculum</label>
-            <select name="curriculum">
+          <div class="field"><label for="cf-country">Country</label><input id="cf-country" type="text" name="country" value="<?= e($old['country'] ?? '') ?>" placeholder="e.g. UAE, UK, India"></div>
+          <div class="field"><label for="cf-curriculum">Curriculum</label>
+            <select id="cf-curriculum" name="curriculum">
               <option value="">Select…</option>
-              <option>IB Diploma</option><option>IB MYP</option><option>IGCSE</option><option>AS &amp; A Level</option><option>Not sure yet</option>
+              <option>IB Diploma</option><option>IBMYP</option><option>IGCSE</option><option>AS &amp; A Level</option><option>Not sure yet</option>
             </select>
           </div>
         </div>
         <div class="field" style="margin-bottom:18px;">
-          <label>Message</label>
-          <textarea name="message" placeholder="Tell us a bit about what you're looking for..." class="<?= isset($errors['message']) ? 'invalid' : '' ?>"><?= e($old['message'] ?? '') ?></textarea>
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" placeholder="Tell us a bit about what you're looking for..." class="<?= isset($errors['message']) ? 'invalid' : '' ?>"><?= e($old['message'] ?? '') ?></textarea>
           <?php if (isset($errors['message'])): ?><span class="err"><?= e($errors['message']) ?></span><?php endif; ?>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Send Message</button>

@@ -6,11 +6,18 @@ namespace App\Controllers\Admin;
 use App\Core\Request;
 use App\Core\Csrf;
 use App\Core\Flash;
+use App\Core\Auth;
 use App\Models\Setting;
 use App\Models\AuditLog;
 
 final class SettingsController extends AdminController
 {
+    public function __construct()
+    {
+        parent::__construct();                       // authenticated
+        Auth::requireRole('admin', admin_url(''));   // settings incl. payment keys — admin only
+    }
+
     /** Editable site settings, grouped for the form. */
     private function groups(): array
     {
@@ -31,6 +38,7 @@ final class SettingsController extends AdminController
                 'stat_countries' => ['label' => 'Countries reached', 'type' => 'text'],
                 'stat_grades'    => ['label' => 'Avg. grade bands', 'type' => 'text'],
                 'stat_curricula' => ['label' => 'Curricula covered', 'type' => 'text'],
+                'stat_group'     => ['label' => 'Max small-group size', 'type' => 'text'],
             ],
             'Analytics & Payments' => [
                 'ga_measurement_id' => ['label' => 'Google Analytics ID', 'type' => 'text', 'hint' => 'e.g. G-XXXXXXXXXX (overrides .env)'],

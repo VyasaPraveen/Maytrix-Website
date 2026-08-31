@@ -83,6 +83,41 @@
       });
     }
 
+    /* ---------- animated stat counters ---------- */
+    var counterEls = document.querySelectorAll('.counter-grid .n, .mini-counters .n');
+    if (counterEls.length && 'IntersectionObserver' in window) {
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var runCount = function (el) {
+        var node = el.querySelector('em') || el;          // keep coloured <em> wrapper if present
+        var raw = node.textContent.trim();
+        var m = raw.match(/^(\D*)(\d+(?:\.\d+)?)(.*)$/);   // prefix / number / suffix (e.g. +1.8, 500+)
+        if (!m) { return; }
+        var prefix = m[1], numStr = m[2], suffix = m[3];
+        var target = parseFloat(numStr);
+        var decimals = (numStr.split('.')[1] || '').length;
+        if (reduceMotion || target === 0) { node.textContent = prefix + numStr + suffix; return; }
+        var duration = 1400, startTs = null;
+        var tick = function (ts) {
+          if (startTs === null) { startTs = ts; }
+          var p = Math.min((ts - startTs) / duration, 1);
+          var eased = 1 - Math.pow(1 - p, 3);             // easeOutCubic
+          if (p < 1) {
+            node.textContent = prefix + (target * eased).toFixed(decimals) + suffix;
+            requestAnimationFrame(tick);
+          } else {
+            node.textContent = prefix + numStr + suffix;   // land exactly on the source value
+          }
+        };
+        requestAnimationFrame(tick);
+      };
+      var counterObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { runCount(en.target); counterObserver.unobserve(en.target); }
+        });
+      }, { threshold: 0.4 });
+      counterEls.forEach(function (c) { counterObserver.observe(c); });
+    }
+
     /* ---------- booking wizard (book page) ---------- */
     var wizard = document.querySelector('.wizard');
     if (wizard) {

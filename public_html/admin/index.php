@@ -32,6 +32,7 @@ use App\Controllers\Admin\SettingsController;
 use App\Controllers\Admin\AdminsController;
 use App\Controllers\Admin\ReportsController;
 use App\Controllers\Admin\BackupsController;
+use App\Controllers\Admin\SiteContentController;
 
 View::root(BASE_PATH . '/app/Views');
 
@@ -99,6 +100,11 @@ $router->post('/messages/{id}/delete', [MessagesController::class, 'destroy']);
 
 /* ---- Reports ---- */
 $router->get('/reports', [ReportsController::class, 'index']);
+
+/* ---- Editable page content ---- */
+$router->get('/content', [SiteContentController::class, 'index']);
+$router->get('/content/{group}/edit', [SiteContentController::class, 'edit']);
+$router->post('/content/{group}', [SiteContentController::class, 'update']);
 
 /* ---- Backups ---- */
 $router->get('/backups', [BackupsController::class, 'index']);

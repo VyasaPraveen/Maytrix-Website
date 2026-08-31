@@ -13,7 +13,10 @@ final class Session
         }
         $name = (string) Config::get('app.session_name', 'maytrix_sess');
         session_name($name);
-        $secure = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off');
+        // HTTPS directly, or terminated at a proxy that forwards the scheme
+        // (common on shared hosting) — so the cookie still gets Secure.
+        $secure = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+            || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https');
         session_set_cookie_params([
             'lifetime' => 0,
             'path'     => '/',

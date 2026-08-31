@@ -15,3 +15,23 @@
     </div>
   </div>
 </section>
+<?php
+$articleLd = array_filter([
+  '@context' => 'https://schema.org',
+  '@type'    => 'BlogPosting',
+  'headline' => $post['title'],
+  'description' => $post['seo_description'] ?: ($post['excerpt'] ?? ''),
+  'url'      => base_url('resources/' . $post['slug']),
+  'mainEntityOfPage' => base_url('resources/' . $post['slug']),
+  'image'    => asset('img/logo@2x.png'),
+  'datePublished' => !empty($post['published_at']) ? date('c', strtotime($post['published_at'])) : null,
+  'dateModified'  => !empty($post['updated_at']) ? date('c', strtotime($post['updated_at'])) : (!empty($post['published_at']) ? date('c', strtotime($post['published_at'])) : null),
+  'author'   => ['@type' => 'Organization', 'name' => $settings['brand_name'] ?? 'Maytrix Education'],
+  'publisher' => [
+    '@type' => 'Organization',
+    'name'  => $settings['brand_name'] ?? 'Maytrix Education',
+    'logo'  => ['@type' => 'ImageObject', 'url' => asset('img/logo@2x.png')],
+  ],
+], fn($v) => $v !== null && $v !== '');
+?>
+<script type="application/ld+json" nonce="<?= e(csp_nonce()) ?>"><?= json_encode($articleLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?></script>

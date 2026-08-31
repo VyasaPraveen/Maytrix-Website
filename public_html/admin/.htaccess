@@ -23,5 +23,18 @@
     Header always unset X-Powered-By
 </IfModule>
 
-Options -Indexes
+# Block dotfiles and sensitive extensions (parity with the public app).
+<FilesMatch "(^\.|\.(env|ini|log|sqlite|sql|md|lock|json|dist|bak|old|sh)$)">
+    Require all denied
+</FilesMatch>
+
+# Disable HTTP methods we never use.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK|OPTIONS|CONNECT)$ [NC]
+    RewriteRule ^ - [F]
+</IfModule>
+
+Options -Indexes -ExecCGI -MultiViews
+ServerSignature Off
 DirectoryIndex index.php

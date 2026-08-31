@@ -6,9 +6,9 @@ $preType = $prefill['class_type'] ?? ($old['class_type'] ?? '');
 ?>
 <section class="page-hero" style="text-align:center;">
   <div class="wrap">
-    <span class="pill-eyebrow">Book a Consultation</span>
-    <h1>Let's find the right class for you</h1>
-    <p style="max-width:520px;margin-left:auto;margin-right:auto;">A quick 3-step form — curriculum, subject &amp; class type, then your details. Takes under a minute.</p>
+    <span class="pill-eyebrow"><?= e(block('pages.book.eyebrow')) ?></span>
+    <h1><?= e(block('pages.book.title')) ?></h1>
+    <p style="max-width:520px;margin-left:auto;margin-right:auto;"><?= e(block('pages.book.intro')) ?></p>
   </div>
 </section>
 <section>

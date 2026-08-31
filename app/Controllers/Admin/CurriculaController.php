@@ -28,7 +28,7 @@ final class CurriculaController extends ResourceController
             'fields'     => [
                 ['name' => 'name', 'label' => 'Name', 'type' => 'text', 'rules' => 'required|max:120'],
                 ['name' => 'code', 'label' => 'Code', 'type' => 'text', 'rules' => 'required|max:30', 'unique' => true, 'hint' => 'Unique key, e.g. ib_dp, igcse, alevel'],
-                ['name' => 'short_name', 'label' => 'Short name', 'type' => 'text', 'rules' => 'max:60', 'placeholder' => 'e.g. IB DP'],
+                ['name' => 'short_name', 'label' => 'Short name', 'type' => 'text', 'rules' => 'max:60', 'placeholder' => 'e.g. IBDP'],
                 ['name' => 'tagline', 'label' => 'Tagline', 'type' => 'text', 'rules' => 'max:190'],
                 ['name' => 'description', 'label' => 'Description', 'type' => 'textarea'],
                 ['name' => 'sort_order', 'label' => 'Sort order', 'type' => 'number', 'default' => 0],

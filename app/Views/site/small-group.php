@@ -4,9 +4,9 @@ $curricClass = ['ib_dp' => 'c-ib', 'ib_myp' => 'c-ib', 'igcse' => 'c-igcse', 'al
 <section class="page-hero">
   <div class="wrap">
     <div class="crumbs"><a href="<?= e(base_url()) ?>">Home</a><span>›</span> Classes <span>›</span> Small-Group</div>
-    <span class="pill-eyebrow">Small-Group Classes</span>
-    <h1>Learn alongside students at your level</h1>
-    <p>Cohorts capped at 6 students, matched by curriculum and level, so pacing stays personal even in a group. Seats update live as students enrol.</p>
+    <span class="pill-eyebrow"><?= e(block('pages.smallGroup.eyebrow')) ?></span>
+    <h1><?= e(block('pages.smallGroup.title')) ?></h1>
+    <p><?= e(block('pages.smallGroup.intro')) ?></p>
   </div>
 </section>
 <section>

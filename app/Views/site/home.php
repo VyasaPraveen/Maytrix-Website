@@ -27,7 +27,7 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
     <div class="mx-hero-copy">
       <span class="pill-eyebrow"><?= e($settings['hero_eyebrow'] ?? 'IB · IGCSE · A Level — Maths & Physics') ?></span>
       <h1>Master <em>Maths &amp; Physics</em> with specialist online tutors.</h1>
-      <p class="lede"><?= e($settings['hero_lede'] ?? 'Personal 1-to-1 and small-group classes for IB, IB MYP, Cambridge IGCSE and AS & A Level — taught to your exact exam board and mark scheme, live on Zoom.') ?></p>
+      <p class="lede"><?= e($settings['hero_lede'] ?? 'Personal 1-to-1 and small-group classes for IB, IBMYP, Cambridge IGCSE and AS & A Level — taught to your exact exam board and mark scheme, live on Zoom.') ?></p>
       <div class="mx-hero-ctas">
         <a href="<?= e(base_url('book')) ?>" class="btn btn-primary">Book a Free Consultation</a>
         <a href="<?= e(base_url('programmes')) ?>" class="btn btn-outline">Explore Courses</a>
@@ -51,7 +51,7 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
   <div class="wrap">
     <span class="lbl">Exam boards we teach</span>
     <div class="boards">
-      <span>IB Diploma</span><span>IB MYP</span><span>Cambridge IGCSE</span><span>Cambridge AS &amp; A Level</span>
+      <span>IB Diploma</span><span>IBMYP</span><span>Cambridge IGCSE</span><span>Cambridge AS &amp; A Level</span>
     </div>
   </div>
 </div>
@@ -60,25 +60,25 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
 <section>
   <div class="wrap">
     <div class="section-head center">
-      <span class="pill-eyebrow">Why families choose us</span>
-      <h2>Tutoring built around <em style="font-style:normal;color:var(--blue)">your</em> syllabus</h2>
-      <p>Not general help — subject specialists who teach to the exact board, level and mark scheme you're sitting.</p>
+      <span class="pill-eyebrow"><?= e(block('home.features.eyebrow')) ?></span>
+      <h2><?= e(block('home.features.title')) ?></h2>
+      <p><?= e(block('home.features.intro')) ?></p>
     </div>
     <div class="feature-cards">
       <div class="feature-card">
         <div class="feature-ico"><?= $ic['target'] ?></div>
-        <h3>Exam-board aligned</h3>
-        <p>Every lesson maps to IB, IB MYP, IGCSE or A Level specifications — the command words, mark schemes and past-paper technique that actually earn marks.</p>
+        <h3><?= e(block('home.feature1.title')) ?></h3>
+        <p><?= e(block('home.feature1.body')) ?></p>
       </div>
       <div class="feature-card">
         <div class="feature-ico azure"><?= $ic['users'] ?></div>
-        <h3>1-to-1 or small group</h3>
-        <p>Choose focused private lessons at your own pace, or a small cohort of up to six students at a similar level and target grade.</p>
+        <h3><?= e(block('home.feature2.title')) ?></h3>
+        <p><?= e(block('home.feature2.body')) ?></p>
       </div>
       <div class="feature-card">
         <div class="feature-ico navy"><?= $ic['video'] ?></div>
-        <h3>Live &amp; online</h3>
-        <p>Interactive classes on Zoom with a shared whiteboard, worked past papers and recordings — join from India, the Gulf, the UK or Europe.</p>
+        <h3><?= e(block('home.feature3.title')) ?></h3>
+        <p><?= e(block('home.feature3.body')) ?></p>
       </div>
     </div>
   </div>
@@ -87,8 +87,8 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
 <!-- ===================== MARQUEE ===================== -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <div class="marquee-item">Mathematics <span>✦</span> Physics <span>✦</span> IB Diploma <span>✦</span> IB MYP <span>✦</span> Cambridge IGCSE <span>✦</span> AS &amp; A Level <span>✦</span> Past-paper mastery <span>✦</span></div>
-    <div class="marquee-item">Mathematics <span>✦</span> Physics <span>✦</span> IB Diploma <span>✦</span> IB MYP <span>✦</span> Cambridge IGCSE <span>✦</span> AS &amp; A Level <span>✦</span> Past-paper mastery <span>✦</span></div>
+    <div class="marquee-item">Mathematics <span>✦</span> Physics <span>✦</span> IB Diploma <span>✦</span> IBMYP <span>✦</span> Cambridge IGCSE <span>✦</span> AS &amp; A Level <span>✦</span> Past-paper mastery <span>✦</span></div>
+    <div class="marquee-item">Mathematics <span>✦</span> Physics <span>✦</span> IB Diploma <span>✦</span> IBMYP <span>✦</span> Cambridge IGCSE <span>✦</span> AS &amp; A Level <span>✦</span> Past-paper mastery <span>✦</span></div>
   </div>
 </div>
 
@@ -96,12 +96,12 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
 <section>
   <div class="wrap split">
     <div class="split-art">
-      <img src="<?= e(asset('img/results-illustration.svg')) ?>" alt="Grade improvement over a term" width="520" height="480">
+      <img src="<?= e(asset('img/results-illustration.svg')) ?>" alt="Grade improvement over a term" width="520" height="480" loading="lazy">
     </div>
     <div class="split-copy">
-      <span class="pill-eyebrow">Real, measurable progress</span>
-      <h2>Grades that move — because the teaching is targeted</h2>
-      <p>We start by finding the exact gap between where a student is and the grade they're aiming for, then build a plan around it. No filler, no generic worksheets.</p>
+      <span class="pill-eyebrow"><?= e(block('home.results.eyebrow')) ?></span>
+      <h2><?= e(block('home.results.title')) ?></h2>
+      <p><?= e(block('home.results.intro')) ?></p>
       <ul class="checklist">
         <li><span class="check-ico"><?= $ic['check'] ?></span><span><b>Diagnostic first.</b> We assess the syllabus, the gap and the target grade before the first lesson.</span></li>
         <li><span class="check-ico"><?= $ic['check'] ?></span><span><b>Mark-scheme trained tutors</b> who teach the technique examiners reward, not just the topic.</span></li>
@@ -111,6 +111,7 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
         <div class="mc"><div class="n"><em><?= e($settings['stat_grades'] ?? '+1.8') ?></em></div><div class="l">avg. grade bands gained</div></div>
         <div class="mc"><div class="n"><?= e($settings['stat_students'] ?? '500+') ?></div><div class="l">students taught</div></div>
         <div class="mc"><div class="n"><?= e($settings['stat_countries'] ?? '12') ?></div><div class="l">countries reached</div></div>
+        <div class="mc"><div class="n"><?= e($settings['stat_group'] ?? '6') ?></div><div class="l">max small-group size</div></div>
       </div>
     </div>
   </div>
@@ -120,9 +121,9 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
 <section class="section alt">
   <div class="wrap">
     <div class="section-head center">
-      <span class="pill-eyebrow">Curricula</span>
-      <h2>Specialists in four exam boards</h2>
-      <p>Dedicated Mathematics &amp; Physics pathways for every board and level we teach.</p>
+      <span class="pill-eyebrow"><?= e(block('home.curricula.eyebrow')) ?></span>
+      <h2><?= e(block('home.curricula.title')) ?></h2>
+      <p><?= e(block('home.curricula.intro')) ?></p>
     </div>
     <div class="curr-grid">
       <?php foreach ($curricula as $c): ?>
@@ -141,8 +142,8 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
 <section>
   <div class="wrap">
     <div class="section-head center">
-      <span class="pill-eyebrow">The Maytrix difference</span>
-      <h2>Everything set up for serious progress</h2>
+      <span class="pill-eyebrow"><?= e(block('home.why.eyebrow')) ?></span>
+      <h2><?= e(block('home.why.title')) ?></h2>
     </div>
     <div class="why-grid">
       <div class="why-item"><div class="wi"><?= $ic['badge'] ?></div><div><h4>Subject-specialist tutors</h4><p>Maths &amp; Physics only — taught by people who know these two subjects and their boards inside out.</p></div></div>
@@ -154,45 +155,6 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
     </div>
   </div>
 </section>
-
-<!-- ===================== POPULAR CLASSES ===================== -->
-<?php if (!empty($classes)): ?>
-<section class="section alt">
-  <div class="wrap">
-    <div class="section-head center">
-      <span class="pill-eyebrow">Enrolling now</span>
-      <h2>Popular small-group classes</h2>
-      <p>Live cohorts with limited seats — reserve a place or ask about a 1-to-1 alternative.</p>
-    </div>
-    <div class="class-cards">
-      <?php foreach ($classes as $b):
-        $avail = (int) ($b['available_seats'] ?? 0); $max = (int) ($b['max_seats'] ?? 0);
-        $cur = $b['currency'] ?? 'INR'; $price = $b['price'] ?? null; ?>
-        <div class="klass-card">
-          <div class="klass-top">
-            <?php if (!empty($b['mode_name'])): ?><span class="b-mode"><?= e($b['mode_name']) ?></span><?php endif; ?>
-            <div class="k-curr"><?= e($b['curriculum_code'] ?: $b['curriculum_name'] ?? '') ?> · <?= e($b['subject_name'] ?? '') ?></div>
-            <div class="k-name"><?= e($b['name']) ?></div>
-          </div>
-          <div class="klass-body">
-            <div class="klass-meta">
-              <?php if (!empty($b['schedule_text'])): ?><span><?= $ic['calendar'] ?><?= e($b['schedule_text']) ?></span><?php endif; ?>
-              <span><?= $ic['seat'] ?><?= $avail > 0 ? $avail . ' of ' . $max . ' seats left' : 'Waitlist' ?></span>
-            </div>
-            <div class="klass-foot">
-              <div class="klass-price"><?= $price !== null ? e(($sym[$cur] ?? $cur.' ') . number_format((float)$price)) : 'Enquire' ?> <small><?= $price !== null ? '/ course' : '' ?></small></div>
-              <a href="<?= e(base_url('small-group')) ?>" class="btn btn-primary btn-sm">View class</a>
-            </div>
-          </div>
-        </div>
-      <?php endforeach; ?>
-    </div>
-    <div style="text-align:center;margin-top:34px;">
-      <a href="<?= e(base_url('programmes')) ?>" class="btn btn-outline">See all courses &amp; the full matrix</a>
-    </div>
-  </div>
-</section>
-<?php endif; ?>
 
 <!-- ===================== COUNTER BAND ===================== -->
 <section class="counter-band">
@@ -210,8 +172,8 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
 <section>
   <div class="wrap">
     <div class="section-head center">
-      <span class="pill-eyebrow">How it works</span>
-      <h2>From enquiry to your first class</h2>
+      <span class="pill-eyebrow"><?= e(block('home.steps.eyebrow')) ?></span>
+      <h2><?= e(block('home.steps.title')) ?></h2>
     </div>
     <ol class="steps">
       <li><h4>Choose curriculum &amp; subject</h4><p>Tell us your board, level and subject — IB, IGCSE or A Level, Maths or Physics.</p></li>
@@ -226,9 +188,9 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
 <section class="section alt">
   <div class="wrap split">
     <div class="split-copy">
-      <span class="pill-eyebrow">See how we teach</span>
-      <h2>Every concept, broken down step by step</h2>
-      <p>We don't just give the answer — we show the method examiners want, one clear line at a time. Switch between a Maths and a Physics example.</p>
+      <span class="pill-eyebrow"><?= e(block('home.worked.eyebrow')) ?></span>
+      <h2><?= e(block('home.worked.title')) ?></h2>
+      <p><?= e(block('home.worked.intro')) ?></p>
       <div style="margin-top:8px;">
         <a href="<?= e(base_url('book')) ?>" class="btn btn-primary">Try a free consultation</a>
       </div>
@@ -252,8 +214,8 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
 <section>
   <div class="wrap">
     <div class="section-head center">
-      <span class="pill-eyebrow">Parents &amp; students</span>
-      <h2>Trusted by families around the world</h2>
+      <span class="pill-eyebrow"><?= e(block('home.testi.eyebrow')) ?></span>
+      <h2><?= e(block('home.testi.title')) ?></h2>
     </div>
     <div class="testi-grid">
       <div class="testi-card">
@@ -283,8 +245,8 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
 <section class="section alt">
   <div class="wrap">
     <div class="section-head center">
-      <span class="pill-eyebrow">From our tutors</span>
-      <h2>Resources &amp; exam guidance</h2>
+      <span class="pill-eyebrow"><?= e(block('home.resources.eyebrow')) ?></span>
+      <h2><?= e(block('home.resources.title')) ?></h2>
     </div>
     <div class="post-grid">
       <?php foreach ($posts as $p): ?>
@@ -308,8 +270,8 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
   <div class="wrap">
     <div class="cta-banner">
       <div class="cta-copy">
-        <h2>Ready to see where your child stands?</h2>
-        <p>Book a free 20-minute consultation. We'll assess the syllabus, pinpoint the gap, and recommend the right 1-to-1 or small-group plan.</p>
+        <h2><?= e(block('home.cta.title')) ?></h2>
+        <p><?= e(block('home.cta.body')) ?></p>
       </div>
       <div style="position:relative;z-index:1;">
         <a href="<?= e(base_url('book')) ?>" class="btn btn-primary">Book a Free Consultation</a>

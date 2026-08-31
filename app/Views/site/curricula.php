@@ -6,9 +6,9 @@ foreach ($pages as $p) { $pagesByCurric[$p['curriculum_id']][] = $p; }
 <section class="page-hero">
   <div class="wrap">
     <div class="crumbs"><a href="<?= e(base_url()) ?>">Home</a><span>›</span> Curricula</div>
-    <span class="pill-eyebrow">Curricula</span>
-    <h1>IB · IB MYP · Cambridge IGCSE · Cambridge AS &amp; A Level</h1>
-    <p>Four curricula, taught by specialists who work inside them every week. Select a curriculum to see how classes are structured, or open the dedicated page for each subject.</p>
+    <span class="pill-eyebrow"><?= e(block('pages.curricula.eyebrow')) ?></span>
+    <h1><?= e(block('pages.curricula.title')) ?></h1>
+    <p><?= e(block('pages.curricula.intro')) ?></p>
   </div>
 </section>
 <section>

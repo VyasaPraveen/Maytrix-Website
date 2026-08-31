@@ -16,6 +16,11 @@ final class Mailer
 {
     public static function send(string $to, string $subject, string $htmlBody, ?string $replyTo = null): bool
     {
+        // Neutralise header (CRLF) injection from any user-derived subject/address.
+        $subject = self::headerSafe($subject);
+        $to      = self::headerSafe($to);
+        $replyTo = $replyTo !== null ? self::headerSafe($replyTo) : null;
+
         $fromName = (string) Config::get('mail.from_name', 'Maytrix Education');
         $fromAddr = (string) Config::get('mail.from_address', 'no-reply@example.com');
 
@@ -52,7 +57,13 @@ final class Mailer
 
     private static function encodeName(string $name): string
     {
-        return '=?UTF-8?B?' . base64_encode($name) . '?=';
+        return '=?UTF-8?B?' . base64_encode(self::headerSafe($name)) . '?=';
+    }
+
+    /** Collapse CR/LF so user data cannot inject extra mail headers. */
+    private static function headerSafe(string $value): string
+    {
+        return trim((string) preg_replace('/[\r\n]+/', ' ', $value));
     }
 
     private static function log(string $to, string $subject, string $body, string $status = 'DEV'): void

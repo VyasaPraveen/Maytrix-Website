@@ -56,32 +56,46 @@ final class BookingController extends SiteController
             return;
         }
 
-        // Link/create a student record.
-        $studentId = (new Student())->findOrCreate([
-            'name'     => $input['name'],
-            'email'    => $input['email'],
-            'phone'    => $input['phone'] ?? null,
-            'country'  => $input['country'] ?? null,
-            'timezone' => $input['timezone'] ?? null,
-            'created_at' => now(),
-        ]);
+        // Student + booking created together in one transaction (no orphans).
+        $bookingModel = new Booking();
+        $db = $bookingModel->db();
+        $db->beginTransaction();
+        try {
+            $studentId = (new Student())->findOrCreate([
+                'name'     => $input['name'],
+                'email'    => $input['email'],
+                'phone'    => $input['phone'] ?? null,
+                'country'  => $input['country'] ?? null,
+                'timezone' => $input['timezone'] ?? null,
+                'created_at' => now(),
+            ]);
 
-        $bookingId = (new Booking())->create([
-            'student_id'        => $studentId,
-            'name'              => $input['name'],
-            'email'             => $input['email'],
-            'phone'             => $input['phone'] ?? null,
-            'country'           => $input['country'] ?? null,
-            'timezone'          => $input['timezone'] ?? null,
-            'curriculum_id'     => (int) $input['curriculum_id'],
-            'subject_id'        => (int) $input['subject_id'],
-            'class_type'        => $input['class_type'],
-            'mode_id'           => !empty($input['mode_id']) ? (int) $input['mode_id'] : null,
-            'preferred_contact' => $input['preferred_contact'] ?? 'Email',
-            'message'           => $input['message'] ?? null,
-            'status'            => 'new',
-            'created_at'        => now(),
-        ]);
+            $bookingId = $bookingModel->create([
+                'student_id'        => $studentId,
+                'name'              => $input['name'],
+                'email'             => $input['email'],
+                'phone'             => $input['phone'] ?? null,
+                'country'           => $input['country'] ?? null,
+                'timezone'          => $input['timezone'] ?? null,
+                'curriculum_id'     => (int) $input['curriculum_id'],
+                'subject_id'        => (int) $input['subject_id'],
+                'class_type'        => $input['class_type'],
+                'mode_id'           => !empty($input['mode_id']) ? (int) $input['mode_id'] : null,
+                'preferred_contact' => $input['preferred_contact'] ?? 'Email',
+                'message'           => $input['message'] ?? null,
+                'status'            => 'new',
+                'created_at'        => now(),
+            ]);
+            $db->commit();
+        } catch (\Throwable $e) {
+            if ($db->inTransaction()) {
+                $db->rollBack();
+            }
+            log_message('Booking store failed: ' . $e->getMessage());
+            Flash::error('Sorry, we could not submit your request. Please try again.');
+            $this->redirect(base_url('book'));
+            return;
+        }
 
         // Confirmation email to the student + notify admin.
         Mailer::send($input['email'], 'We\'ve received your consultation request — Maytrix Education',

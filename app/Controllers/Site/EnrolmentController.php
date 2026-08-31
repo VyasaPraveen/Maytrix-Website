@@ -43,34 +43,51 @@ final class EnrolmentController extends SiteController
             return;
         }
 
-        $studentId = (new Student())->findOrCreate([
-            'name'       => $input['name'],
-            'email'      => $input['email'],
-            'phone'      => $input['phone'] ?? null,
-            'country'    => $input['country'] ?? null,
-            'timezone'   => $input['timezone'] ?? null,
-            'created_at' => now(),
-        ]);
+        // Student + enrolment created together in one transaction so a failure
+        // can't leave an orphaned student with no enrolment.
+        $enrolModel = new Enrolment();
+        $db = $enrolModel->db();
+        $db->beginTransaction();
+        try {
+            $studentId = (new Student())->findOrCreate([
+                'name'       => $input['name'],
+                'email'      => $input['email'],
+                'phone'      => $input['phone'] ?? null,
+                'country'    => $input['country'] ?? null,
+                'timezone'   => $input['timezone'] ?? null,
+                'created_at' => now(),
+            ]);
 
-        // Prevent duplicate active enrolment by the same student in this batch.
-        $existing = (new Enrolment())->where(['batch_id' => $batchId, 'student_id' => $studentId]);
-        $active = array_filter($existing, fn($e) => in_array($e['status'], ['pending', 'confirmed'], true));
-        if ($active) {
-            Flash::error('You already have an enrolment request for this class.');
+            // Prevent duplicate active enrolment by the same student in this batch.
+            $existing = $enrolModel->where(['batch_id' => $batchId, 'student_id' => $studentId]);
+            $active = array_filter($existing, fn($e) => in_array($e['status'], ['pending', 'confirmed'], true));
+            if ($active) {
+                $db->rollBack();
+                Flash::error('You already have an enrolment request for this class.');
+                $this->redirect(base_url('batch/' . $batchId));
+                return;
+            }
+
+            $enrolId = $enrolModel->create([
+                'batch_id'       => $batchId,
+                'student_id'     => $studentId,
+                'status'         => 'pending',
+                'payment_status' => 'unpaid',
+                'amount'         => $batch['price'] ?? null,
+                'currency'       => $batch['currency'] ?? 'INR',
+                'enrolled_at'    => now(),
+                'created_at'     => now(),
+            ]);
+            $db->commit();
+        } catch (\Throwable $e) {
+            if ($db->inTransaction()) {
+                $db->rollBack();
+            }
+            log_message('Enrolment store failed: ' . $e->getMessage());
+            Flash::error('Sorry, we could not complete your enrolment. Please try again.');
             $this->redirect(base_url('batch/' . $batchId));
             return;
         }
-
-        $enrolId = (new Enrolment())->create([
-            'batch_id'       => $batchId,
-            'student_id'     => $studentId,
-            'status'         => 'pending',
-            'payment_status' => 'unpaid',
-            'amount'         => $batch['price'] ?? null,
-            'currency'       => $batch['currency'] ?? 'INR',
-            'enrolled_at'    => now(),
-            'created_at'     => now(),
-        ]);
 
         Mailer::send($input['email'], 'Enrolment request received — ' . ($batch['name'] ?? 'Class'),
             '<p>Hi ' . e($input['name']) . ',</p>'
@@ -93,6 +110,7 @@ final class EnrolmentController extends SiteController
             'enrol'     => $enrol,
             'batch'     => $batch,
             'metaTitle' => 'Enrolment received | Maytrix Education',
+            'metaRobots' => 'noindex,follow', // transactional thank-you page — keep out of the index
         ]);
     }
 }

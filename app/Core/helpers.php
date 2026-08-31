@@ -36,17 +36,28 @@ if (!function_exists('base_url')) {
     }
 }
 
+if (!function_exists('asset_version')) {
+    /** Append ?v=<mtime> so far-future-cached assets refresh when the file changes. */
+    function asset_version(string $relFromPublic, string $url): string
+    {
+        $file = BASE_PATH . '/public_html/' . ltrim($relFromPublic, '/');
+        return is_file($file) ? $url . '?v=' . filemtime($file) : $url;
+    }
+}
+
 if (!function_exists('asset')) {
     function asset(string $path): string
     {
-        return base_url('assets/' . ltrim($path, '/'));
+        $rel = 'assets/' . ltrim($path, '/');
+        return asset_version($rel, base_url($rel));
     }
 }
 
 if (!function_exists('admin_asset')) {
     function admin_asset(string $path): string
     {
-        return base_url('admin/assets/' . ltrim($path, '/'));
+        $rel = 'admin/assets/' . ltrim($path, '/');
+        return asset_version($rel, base_url($rel));
     }
 }
 
@@ -135,5 +146,69 @@ if (!function_exists('log_message')) {
     {
         $file = BASE_PATH . '/storage/logs/' . $channel . '.log';
         @file_put_contents($file, '[' . now() . '] ' . $message . PHP_EOL, FILE_APPEND);
+    }
+}
+
+if (!function_exists('seo_excerpt')) {
+    /** Trim text to <= $max chars on a word boundary, appending … if cut. */
+    function seo_excerpt(string $text, int $max = 160): string
+    {
+        $text = trim((string) preg_replace('/\s+/', ' ', strip_tags($text)));
+        if (mb_strlen($text) <= $max) {
+            return $text;
+        }
+        $cut = mb_substr($text, 0, $max - 1);
+        $space = mb_strrpos($cut, ' ');
+        if ($space !== false && $space > 0) {
+            $cut = mb_substr($cut, 0, $space);
+        }
+        return rtrim($cut, " ,.;:—-") . '…';
+    }
+}
+
+if (!function_exists('content_blocks_registry')) {
+    /** The editable-copy registry (groups → blocks with defaults). */
+    function content_blocks_registry(): array
+    {
+        static $registry = null;
+        if ($registry === null) {
+            $registry = require BASE_PATH . '/app/Support/content_blocks.php';
+        }
+        return $registry;
+    }
+}
+
+if (!function_exists('block')) {
+    /**
+     * Editable front-end copy. Returns the client's saved override if present,
+     * otherwise the registry default, otherwise $fallback. Output is raw — escape
+     * with e() for plain text; use directly only for trusted HTML blocks.
+     */
+    function block(string $key, ?string $fallback = null): string
+    {
+        static $defaults = null;
+        static $overrides = null;
+
+        if ($defaults === null) {
+            $defaults = [];
+            foreach (content_blocks_registry() as $group) {
+                foreach ($group['blocks'] as $k => $meta) {
+                    $defaults[$k] = (string) ($meta['default'] ?? '');
+                }
+            }
+        }
+        if ($overrides === null) {
+            try {
+                $overrides = (new \App\Models\ContentBlock())->overrides();
+            } catch (\Throwable $e) {
+                $overrides = []; // table missing (pre-migration) → fall back to defaults
+            }
+        }
+
+        $value = $overrides[$key] ?? null;
+        if ($value !== null && trim($value) !== '') {
+            return $value;
+        }
+        return $defaults[$key] ?? ($fallback ?? '');
     }
 }

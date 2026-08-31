@@ -13,6 +13,12 @@ use App\Models\AuditLog;
 
 final class AdminsController extends AdminController
 {
+    public function __construct()
+    {
+        parent::__construct();                       // authenticated
+        Auth::requireRole('admin', admin_url(''));   // editors cannot manage admins
+    }
+
     public function index(Request $request): void
     {
         $result = (new Admin())->paginate(\App\Core\Paginator::currentPage(), 20, 'id ASC');

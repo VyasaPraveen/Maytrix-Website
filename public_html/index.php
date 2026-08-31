@@ -34,7 +34,10 @@ $router->get('/about',                  [ContentController::class, 'about']);
 $router->get('/curricula',              [CurriculumController::class, 'curricula']);
 $router->get('/subjects',               [CurriculumController::class, 'subjects']);
 $router->get('/programmes',             [CurriculumController::class, 'matrix']);
-$router->get('/courses',                [CurriculumController::class, 'matrix']); // alias
+$router->get('/courses', function () {  // legacy alias → 301 to canonical /programmes
+    header('Location: ' . base_url('programmes'), true, 301);
+    exit;
+});
 $router->get('/curriculum/{slug}',      [CurriculumController::class, 'show']);
 
 $router->get('/one-to-one',             [ClassController::class, 'oneToOne']);

@@ -209,7 +209,7 @@ return [
             'confirmed_at datetime null',
             'created_at datetime null',
         ],
-        'indexes' => [['batch_id'], ['student_id'], ['status']],
+        'indexes' => [['batch_id'], ['student_id'], ['status'], ['batch_id', 'status'], ['payment_status']],
     ],
     // 1-to-1 enquiry / consultation requests (request-based booking flow).
     'bookings' => [
@@ -234,7 +234,7 @@ return [
             'admin_notes text null',
             'created_at datetime null',
         ],
-        'indexes' => [['student_id'], ['curriculum_id'], ['subject_id'], ['status']],
+        'indexes' => [['student_id'], ['curriculum_id'], ['subject_id'], ['status'], ['mode_id']],
     ],
     // Blog / Resources.
     'posts' => [
@@ -314,5 +314,16 @@ return [
             'created_at datetime null',
         ],
         'indexes' => [['context', 'context_id'], ['status']],
+    ],
+    // Editable front-end copy (section headings, intros, About cards…).
+    // Stores only overrides; defaults live in app/Support/content_blocks.php.
+    'content_blocks' => [
+        'connection' => 'web',
+        'columns' => [
+            'id pk',
+            'block_key string(160) notnull unique',
+            'value longtext null',
+            'updated_at datetime null',
+        ],
     ],
 ];

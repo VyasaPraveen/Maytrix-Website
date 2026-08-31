@@ -5,6 +5,7 @@ namespace App\Controllers\Admin;
 
 use App\Core\Request;
 use App\Core\Flash;
+use App\Core\Auth;
 use App\Core\Database;
 use App\Models\AuditLog;
 use App\Support\Backup;
@@ -17,6 +18,12 @@ use App\Support\Backup;
 final class BackupsController extends AdminController
 {
     private const CONNS = ['web', 'admin'];
+
+    public function __construct()
+    {
+        parent::__construct();                       // authenticated
+        Auth::requireRole('admin', admin_url(''));   // DB dumps contain password hashes — admin only
+    }
 
     public function index(Request $request): void
     {

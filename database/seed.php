@@ -50,11 +50,13 @@ if ($isEmpty($admin, 'admins')) {
 /* ----------------------------- CURRICULA ------------------------------ */
 $curriculumIds = [];
 if ($isEmpty($web, 'curricula')) {
+    // Order is intentional (matches the client's curricula spec):
+    // IBDP → IBMYP 4 & 5 → AS & A Level → IGCSE.
     $curricula = [
-        ['ib_dp',  'International Baccalaureate',   'IB DP',   'Higher & Standard Level Mathematics (AA & AI) and Physics.'],
-        ['ib_myp', 'IB Middle Years Programme',     'IB MYP',  'MYP Mathematics (Extended & Standard) and Physics.'],
-        ['igcse',  'Cambridge IGCSE',               'IGCSE',   'Cambridge IGCSE Mathematics and Physics — strong foundations.'],
-        ['alevel', 'Cambridge AS & A Level',        'A Level', 'Cambridge International AS & A Level Mathematics and Physics.'],
+        ['ib_dp',  'International Baccalaureate',   'IBDP',   'Higher & Standard Level Mathematics — Analysis & Approaches (AA) and Applications & Interpretation (AI) — and Physics, across both years of the Diploma.'],
+        ['ib_myp', 'IB Middle Years Programme',     'IBMYP',  'MYP Year 4 & 5 Mathematics (Standard & Extended) and Physics.'],
+        ['alevel', 'Cambridge AS & A Level',        'A Level', 'Cambridge International AS & A Level Mathematics (9709) & Further Mathematics (9231), and Physics (9702).'],
+        ['igcse',  'Cambridge IGCSE',               'IGCSE',   'Cambridge IGCSE Mathematics (0580 Extended, 0606 Additional, 0607 International) and Physics (0625).'],
     ];
     $i = 0;
     foreach ($curricula as [$code, $name, $short, $desc]) {
@@ -135,27 +137,27 @@ if ($isEmpty($web, 'curriculum_pages')) {
                 ['Quantum & Nuclear Physics', 'HL-only content taught as its own strand, not bolted onto SL material.'],
                 ['Internal Assessment (IA)', 'Support with experiment design, data processing and the evaluation section specifically.'],
             ]],
-        ['curric-ibmyp-math', 'ib_myp', 'math', 'IB MYP · Mathematics', 'IB MYP Mathematics',
-            ['Extended', 'Standard'],
-            "MYP Mathematics at both Extended and Standard levels, focused on the criterion-based assessment style (Criteria A–D) and the conceptual, statement-of-inquiry thinking that sets students up for a smooth transition into the Diploma Programme.",
+        ['curric-ibmyp-math', 'ib_myp', 'math', 'IBMYP · Mathematics', 'IBMYP Mathematics',
+            ['Standard', 'Extended'],
+            "MYP Year 4 & 5 Mathematics at both Standard and Extended levels, focused on the criterion-based assessment style (Criteria A–D) and the conceptual, statement-of-inquiry thinking that sets students up for a smooth transition into the Diploma Programme.",
             [
                 ['Number & Algebra', 'Building fluency and the reasoning habits MYP criteria specifically reward.'],
                 ['Geometry & Trigonometry', 'Spatial reasoning and proof, scaffolded toward DP-level rigour.'],
                 ['Statistics & Probability', "Investigation-style tasks matching MYP's criterion-based structure."],
                 ['Criteria-Based Assessment', 'Direct coaching on Criteria A–D so students know exactly what each mark reflects.'],
             ]],
-        ['curric-ibmyp-physics', 'ib_myp', 'physics', 'IB MYP · Physics', 'IB MYP Physics',
-            ['MYP 4–5'],
+        ['curric-ibmyp-physics', 'ib_myp', 'physics', 'IBMYP · Physics', 'IBMYP Physics',
+            ['MYP 4 & 5'],
             "MYP Physics (Sciences), building the inquiry-based scientific thinking and criterion-based assessment fluency that MYP demands, while laying the conceptual groundwork the DP Physics course will build directly on.",
             [
                 ['Forces & Energy', "Core mechanics concepts introduced with MYP's inquiry-cycle approach."],
                 ['Matter & Interactions', 'Particle models and interactions, building toward DP-level detail.'],
                 ['Scientific Investigation', 'Criterion-based lab write-ups — hypothesis, method, analysis, evaluation.'],
-                ['DP Readiness', 'A light bridge into IB DP Physics command terms and paper structure.'],
+                ['DP Readiness', 'A light bridge into IBDP Physics command terms and paper structure.'],
             ]],
         ['curric-igcse-math', 'igcse', 'math', 'Cambridge IGCSE · Mathematics', 'Cambridge IGCSE Mathematics',
-            ['International', 'Extended'],
-            "Cambridge IGCSE Mathematics, covering both the International and Extended syllabus variants, with steady Paper 1/Paper 2 style practice built in from Year 10 onward.",
+            ['Extended (0580)', 'Additional (0606)', 'International (0607)'],
+            "Cambridge IGCSE Mathematics across all three routes we teach — Extended (0580), Additional (0606) and International (0607) — with steady Paper 1/Paper 2 style practice built in from Year 10 onward.",
             [
                 ['Number & Algebra', "Core techniques built to Cambridge's specific question style, not a generic syllabus."],
                 ['Geometry & Mensuration', 'Shape, space and measures, with calculator and non-calculator technique both covered.'],
@@ -163,8 +165,8 @@ if ($isEmpty($web, 'curriculum_pages')) {
                 ['Exam Technique', 'Regular past-paper drilling with board-specific mark-scheme feedback.'],
             ]],
         ['curric-igcse-physics', 'igcse', 'physics', 'Cambridge IGCSE · Physics', 'Cambridge IGCSE Physics',
-            ['Core', 'Extended'],
-            "Cambridge IGCSE Physics across the full syllabus, building strong practical and conceptual foundations that carry directly into AS & A Level or the IB Diploma.",
+            ['Physics (0625)'],
+            "Cambridge IGCSE Physics (0625) across the full syllabus, building strong practical and conceptual foundations that carry directly into AS & A Level or the IB Diploma.",
             [
                 ['Forces & Motion', "Core mechanics, built for Cambridge's specific practical-paper expectations."],
                 ['Waves, Light & Sound', 'Core wave behaviour topics with plenty of diagram-based practice.'],
@@ -172,8 +174,8 @@ if ($isEmpty($web, 'curriculum_pages')) {
                 ['Practical & Exam Technique', "Past-paper drilling plus guidance on Cambridge's practical-skills paper."],
             ]],
         ['curric-alevel-math', 'alevel', 'math', 'Cambridge AS & A Level · Mathematics', 'Cambridge AS & A Level Mathematics',
-            ['Pure', 'Mechanics', 'Probability & Statistics'],
-            "Cambridge International AS & A Level Mathematics, taught unit by unit — Pure Mathematics, Mechanics, and Probability & Statistics — to the exact paper structure the Cambridge board sets.",
+            ['Mathematics (9709)', 'Further Mathematics (9231)'],
+            "Cambridge International AS & A Level Mathematics (9709), taught unit by unit — Pure Mathematics, Mechanics, and Probability & Statistics — plus Further Mathematics (9231) for students taking the full further route, to the exact paper structure the Cambridge board sets.",
             [
                 ['Pure Mathematics 1 & 2', 'Algebra, calculus and trigonometry, paced toward AS milestones first.'],
                 ['Mechanics', 'Kinematics, forces and momentum, built for the Mechanics paper specifically.'],
@@ -181,8 +183,8 @@ if ($isEmpty($web, 'curriculum_pages')) {
                 ['Full A Level Drilling', 'Past-paper practice once all AS units are secure, building toward the full A Level.'],
             ]],
         ['curric-alevel-physics', 'alevel', 'physics', 'Cambridge AS & A Level · Physics', 'Cambridge AS & A Level Physics',
-            ['AS', 'A Level'],
-            "The full Cambridge International AS & A Level Physics paper set, with unit-by-unit pacing toward AS milestones, then complete past-paper drilling for the full A Level.",
+            ['Physics (9702)'],
+            "The full Cambridge International AS & A Level Physics (9702) paper set, with unit-by-unit pacing toward AS milestones, then complete past-paper drilling for the full A Level.",
             [
                 ['Mechanics & Matter', 'Foundational AS-level content, paced to build toward full syllabus coverage.'],
                 ['Waves & Electricity', "Core AS/A Level content mapped to Cambridge's specific paper structure."],
@@ -202,7 +204,7 @@ if ($isEmpty($web, 'curriculum_pages')) {
             'intro' => $intro,
             'topics' => json_encode($topics, JSON_UNESCAPED_UNICODE),
             'seo_title' => $title . ' Tutoring | Maytrix Education',
-            'seo_description' => mb_substr($intro, 0, 155),
+            'seo_description' => seo_excerpt($intro, 160),
             'is_published' => 1,
             'sort_order' => $i++,
             'created_at' => $ts,
@@ -344,14 +346,14 @@ if ($isEmpty($web, 'posts')) {
 /* -------------------------------- PAGES ------------------------------- */
 if ($isEmpty($web, 'pages')) {
     $about = <<<HTML
-<p>Maytrix Education was founded to solve one specific problem: students following IB, IB MYP, Cambridge IGCSE or Cambridge AS & A Level, living outside the countries those syllabuses were written for, struggling to find tutors who actually teach to the exact mark scheme they'll sit.</p>
+<p>Maytrix Education was founded to solve one specific problem: students following IB, IBMYP, Cambridge IGCSE or Cambridge AS & A Level, living outside the countries those syllabuses were written for, struggling to find tutors who actually teach to the exact mark scheme they'll sit.</p>
 <p>We specialise deliberately narrow — Mathematics and Physics only, across four curricula — so every tutor on our panel teaches inside their own syllabus, every week, not "maths in general."</p>
 <p>Today we work with students across India, the Gulf, the UK and Europe, over 1-to-1 sessions and small-group classes run live on Zoom, with every class timed around the student's own time zone.</p>
 HTML;
     $insert($web, 'pages', [
         'slug' => 'about', 'title' => 'About Maytrix', 'body_html' => $about,
         'seo_title' => 'About Maytrix Education',
-        'seo_description' => 'Tutoring built for students learning IB, IB MYP, Cambridge IGCSE and A Level Mathematics & Physics across borders.',
+        'seo_description' => 'Tutoring built for students learning IB, IBMYP, Cambridge IGCSE and A Level Mathematics & Physics across borders.',
         'is_published' => 1, 'updated_at' => $ts,
     ]);
     echo "  ✓ pages\n";
@@ -363,14 +365,14 @@ if ($isEmpty($web, 'settings')) {
         'brand_name' => 'Maytrix Education',
         'contact_email' => 'hello@maytrixeducation.com',
         'contact_whatsapp' => '+91 00000 00000',
-        'hero_eyebrow' => 'International Tutoring · IB · IB MYP · IGCSE · A Level',
+        'hero_eyebrow' => 'International Tutoring · IB · IBMYP · IGCSE · A Level',
         'hero_title' => 'Mathematics and Physics, taught the way top scorers actually learn them.',
-        'hero_lede' => '1-to-1 and small-group online classes for IB, IB MYP, Cambridge IGCSE and Cambridge AS & A Level students across India, the Gulf, the UK and Europe — every concept broken down, worked step by step, until it clicks.',
+        'hero_lede' => '1-to-1 and small-group online classes for IB, IBMYP, Cambridge IGCSE and Cambridge AS & A Level students across India, the Gulf, the UK and Europe — every concept broken down, worked step by step, until it clicks.',
         'stat_students' => '500+',
         'stat_countries' => '12',
         'stat_grades' => '+1.8',
         'stat_curricula' => '4',
-        'footer_tagline' => 'International 1-to-1 and small-group online tutoring for IB, IB MYP, Cambridge IGCSE and Cambridge AS & A Level — Mathematics & Physics.',
+        'footer_tagline' => 'International 1-to-1 and small-group online tutoring for IB, IBMYP, Cambridge IGCSE and Cambridge AS & A Level — Mathematics & Physics.',
     ];
     foreach ($settings as $k => $v) {
         $insert($web, 'settings', ['skey' => $k, 'svalue' => $v, 'updated_at' => $ts]);

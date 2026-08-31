@@ -7,6 +7,7 @@ use App\Core\Request;
 use App\Core\Csrf;
 use App\Core\Flash;
 use App\Core\Mailer;
+use App\Core\Database;
 use App\Models\Enrolment;
 use App\Models\Batch;
 use App\Models\Student;
@@ -48,6 +49,12 @@ final class EnrolmentsController extends AdminController
         $db = $enrolModel->db();
         $db->beginTransaction();
         try {
+            // Lock the batch row so two simultaneous confirmations serialize on it
+            // (MySQL). SQLite already takes a DB-level write lock for the transaction.
+            if (Database::driver() === 'mysql') {
+                $lock = $db->prepare('SELECT id FROM batches WHERE id = ? FOR UPDATE');
+                $lock->execute([(int) $enrol['batch_id']]);
+            }
             $batch = (new Batch())->findWithDetails((int) $enrol['batch_id']);
             if ($enrol['status'] !== 'confirmed' && (int) ($batch['available_seats'] ?? 0) <= 0) {
                 $db->rollBack();

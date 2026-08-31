@@ -21,6 +21,7 @@ $menu = [
         ['modes', 'Modes', 'modes'],
     ],
     'Content' => [
+        ['content', 'Page Content', 'content'],
         ['posts', 'Blog / Resources', 'posts'],
         ['pages', 'Pages', 'pages'],
         ['messages', 'Contact Messages', 'messages', $unreadMessages],
@@ -48,7 +49,7 @@ $initials = strtoupper(mb_substr($authUser['name'] ?? 'A', 0, 1));
 <body>
 <div class="admin">
   <aside class="sidebar" id="sidebar">
-    <div class="logo"><img src="<?= e(asset('img/logo-white.png')) ?>" alt="Maytrix Education" class="logo-img" width="600" height="217"></div>
+    <div class="logo"><img src="<?= e(asset('img/logo-white.png')) ?>" alt="Maytrix Education" class="logo-img" width="360" height="130"></div>
     <nav>
       <?php foreach ($menu as $group => $items): ?>
         <div class="nav-group"><?= e($group) ?></div>
@@ -81,7 +82,7 @@ $initials = strtoupper(mb_substr($authUser['name'] ?? 'A', 0, 1));
           <div style="font-weight:600;color:var(--ink);"><?= e($authUser['name'] ?? 'Admin') ?></div>
           <form method="post" action="<?= e(admin_url('logout')) ?>" style="margin:0;">
             <?= \App\Core\Csrf::field() ?>
-            <button type="submit" style="background:none;border:none;color:var(--danger);cursor:pointer;font-size:12px;padding:0;">Sign out</button>
+            <button type="submit" style="background:none;border:none;color:var(--danger);cursor:pointer;font-size:12.5px;padding:6px 2px;min-height:32px;">Sign out</button>
           </form>
         </div>
       </div>
