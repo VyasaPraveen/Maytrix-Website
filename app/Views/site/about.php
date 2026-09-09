@@ -39,21 +39,26 @@
       <span class="pill-eyebrow"><?= e(block('about.tutor.eyebrow')) ?></span>
       <h2><?= e(block('about.tutor.title')) ?></h2>
     </div>
+    <?php $tutorPhoto = trim(block('about.tutor.photo')); ?>
     <div class="tutor-card">
       <div class="tutor-photo">
-        <svg viewBox="0 0 200 200" role="img" aria-label="Tutor portrait">
-          <defs>
-            <linearGradient id="tut-bg" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#EAF6FD"/><stop offset="1" stop-color="#D3E0F3"/>
-            </linearGradient>
-            <linearGradient id="tut-fg" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#1E63A8"/><stop offset="1" stop-color="#0A2452"/>
-            </linearGradient>
-          </defs>
-          <circle cx="100" cy="100" r="100" fill="url(#tut-bg)"/>
-          <circle cx="100" cy="78" r="34" fill="url(#tut-fg)"/>
-          <path d="M40 178 C40 130 74 118 100 118 C126 118 160 130 160 178 Z" fill="url(#tut-fg)"/>
-        </svg>
+        <?php if ($tutorPhoto !== ''): ?>
+          <img src="<?= e(asset($tutorPhoto)) ?>" alt="<?= e(block('about.tutor.name')) ?>" loading="lazy">
+        <?php else: ?>
+          <svg viewBox="0 0 200 200" role="img" aria-label="Tutor portrait">
+            <defs>
+              <linearGradient id="tut-bg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#EAF6FD"/><stop offset="1" stop-color="#D3E0F3"/>
+              </linearGradient>
+              <linearGradient id="tut-fg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#1E63A8"/><stop offset="1" stop-color="#0A2452"/>
+              </linearGradient>
+            </defs>
+            <circle cx="100" cy="100" r="100" fill="url(#tut-bg)"/>
+            <circle cx="100" cy="78" r="34" fill="url(#tut-fg)"/>
+            <path d="M40 178 C40 130 74 118 100 118 C126 118 160 130 160 178 Z" fill="url(#tut-fg)"/>
+          </svg>
+        <?php endif; ?>
       </div>
       <div class="tutor-info">
         <h3><?= e(block('about.tutor.name')) ?></h3>

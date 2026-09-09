@@ -75,6 +75,7 @@ return [
             'about.tutor.title'   => ['label' => 'Meet-your-tutor — heading', 'type' => 'text', 'default' => 'Taught by specialists, not generalists'],
             'about.tutor.name'    => ['label' => 'Tutor — name', 'type' => 'text', 'default' => 'Maytrix Lead Tutor'],
             'about.tutor.role'    => ['label' => 'Tutor — role / credentials', 'type' => 'text', 'default' => 'Mathematics & Physics · IBDP · IBMYP · IGCSE · AS & A Level'],
+            'about.tutor.photo'   => ['label' => 'Tutor — photo (JPG/PNG/WebP)', 'type' => 'image', 'default' => ''],
             'about.tutor.bio'     => ['label' => 'Tutor — bio', 'type' => 'textarea', 'default' => 'Our lead tutors are subject specialists who teach Mathematics and Physics to international exam boards every week — with years of experience guiding students through IBDP, IBMYP, Cambridge IGCSE and AS & A Level to top grades. Every lesson is built around the exact mark scheme a student is sitting.'],
         ],
     ],

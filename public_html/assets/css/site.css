@@ -721,6 +721,7 @@
 .tutor-card{display:grid;grid-template-columns:170px 1fr;gap:32px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:32px;max-width:840px;margin:0 auto;box-shadow:var(--shadow-card);}
 .tutor-photo{width:150px;height:150px;border-radius:50%;overflow:hidden;box-shadow:0 12px 28px -14px rgba(10,36,82,.5);}
 .tutor-photo svg{width:100%;height:100%;display:block;}
+.tutor-photo img{width:100%;height:100%;object-fit:cover;display:block;}
 .tutor-info h3{font-size:20px;margin:0 0 4px;}
 .tutor-role{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--blue-dark);text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px;}
 .tutor-info p{font-size:14.5px;margin-bottom:16px;}
