@@ -141,7 +141,7 @@ $orgLd = array_filter($orgLd, fn($v) => $v !== null && $v !== '' && $v !== []);
   </div>
   <div class="bottom">
     <span>© <?= date('Y') ?> <?= e($brand) ?>. All rights reserved.</span>
-    <span>Built by EPIXS Media</span>
+    <span>Powered by <a href="https://epixs.in/" target="_blank" rel="noopener">EPIXS Media</a></span>
   </div>
 </footer>
 
