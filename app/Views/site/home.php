@@ -32,13 +32,6 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
         <a href="<?= e(base_url('book')) ?>" class="btn btn-primary">Book a Free Consultation</a>
         <a href="<?= e(base_url('programmes')) ?>" class="btn btn-outline">Explore Courses</a>
       </div>
-      <div class="rating-inline">
-        <div class="avatars"><span>SR</span><span>NW</span><span>ZK</span><span>+</span></div>
-        <div>
-          <div class="stars">★★★★★</div>
-          <div class="who"><b><?= e($settings['stat_students'] ?? '500+') ?> students</b> across <?= e($settings['stat_countries'] ?? '12') ?> countries</div>
-        </div>
-      </div>
     </div>
     <div class="mx-hero-art">
       <img src="<?= e(asset('img/hero-illustration.svg')) ?>" alt="Live online Maths and Physics lesson" width="580" height="540">
@@ -51,7 +44,7 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
   <div class="wrap">
     <span class="lbl">Exam boards we teach</span>
     <div class="boards">
-      <span>IB Diploma</span><span>IBMYP</span><span>Cambridge IGCSE</span><span>Cambridge AS &amp; A Level</span>
+      <span>IBDP</span><span>IBMYP</span><span>Cambridge IGCSE</span><span>Cambridge AS &amp; A Level</span>
     </div>
   </div>
 </div>
@@ -87,8 +80,8 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
 <!-- ===================== MARQUEE ===================== -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <div class="marquee-item">Mathematics <span>✦</span> Physics <span>✦</span> IB Diploma <span>✦</span> IBMYP <span>✦</span> Cambridge IGCSE <span>✦</span> AS &amp; A Level <span>✦</span> Past-paper mastery <span>✦</span></div>
-    <div class="marquee-item">Mathematics <span>✦</span> Physics <span>✦</span> IB Diploma <span>✦</span> IBMYP <span>✦</span> Cambridge IGCSE <span>✦</span> AS &amp; A Level <span>✦</span> Past-paper mastery <span>✦</span></div>
+    <div class="marquee-item">Mathematics <span>✦</span> Physics <span>✦</span> IBDP <span>✦</span> IBMYP <span>✦</span> Cambridge IGCSE <span>✦</span> AS &amp; A Level <span>✦</span> Past-paper mastery <span>✦</span></div>
+    <div class="marquee-item">Mathematics <span>✦</span> Physics <span>✦</span> IBDP <span>✦</span> IBMYP <span>✦</span> Cambridge IGCSE <span>✦</span> AS &amp; A Level <span>✦</span> Past-paper mastery <span>✦</span></div>
   </div>
 </div>
 
@@ -126,9 +119,13 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
       <p><?= e(block('home.curricula.intro')) ?></p>
     </div>
     <div class="curr-grid">
-      <?php foreach ($curricula as $c): ?>
+      <?php foreach ($curricula as $c):
+          // Full abbreviation badge (no truncation). MYP shows its year band explicitly.
+          $abbr = $c['short_name'] ?: strtoupper((string)($c['code'] ?? ''));
+          if (($c['code'] ?? '') === 'ib_myp') { $abbr = 'IBMYP Year 4 & 5'; }
+      ?>
         <div class="curr-card">
-          <div class="badge-ico"><?= e(strtoupper(substr($c['short_name'] ?: $c['code'] ?: $c['name'], 0, 3))) ?></div>
+          <div class="badge-ico"><?= e($abbr) ?></div>
           <h3><?= e($c['name']) ?></h3>
           <p><?= e($c['tagline'] ?: 'Mathematics & Physics, taught to the ' . $c['name'] . ' specification.') ?></p>
           <a href="<?= e(base_url('curricula')) ?>" class="go">Explore <?= e($c['short_name'] ?: $c['name']) ?> <?= $ic['penrose'] === '' ? '' : '→' ?></a>
@@ -184,7 +181,7 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
   </div>
 </section>
 
-<!-- ===================== WORKED EXAMPLE ===================== -->
+<!-- ===================== GRAPHS ===================== -->
 <section class="section alt">
   <div class="wrap split">
     <div class="split-copy">
@@ -196,15 +193,67 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
       </div>
     </div>
     <div class="split-art">
-      <div class="worked-panel">
+      <div class="worked-panel graph-card">
         <div class="worked-head">
-          <span class="label">Live worked example</span>
+          <span class="label">Interactive graph</span>
           <div class="subject-tabs">
-            <button type="button" class="active" data-worked="math">Math</button>
-            <button type="button" data-worked="physics">Physics</button>
+            <button type="button" class="active" data-graph="math">Maths</button>
+            <button type="button" data-graph="physics">Physics</button>
           </div>
         </div>
-        <div class="worked-body" id="workedBody"><!-- injected by JS --></div>
+        <div class="worked-body">
+          <!-- Maths: quadratic function -->
+          <figure class="graph-panel active" data-graph-panel="math">
+            <svg class="mx-graph" viewBox="0 0 480 290" role="img" aria-label="Graph of the quadratic function y = x squared">
+              <defs>
+                <linearGradient id="mxGmath" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#0E9EE6" stop-opacity=".30"/>
+                  <stop offset="1" stop-color="#0E9EE6" stop-opacity="0"/>
+                </linearGradient>
+                <marker id="mxArrowA" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0 0 L7 4.5 L0 9 Z" fill="#9DB0C9"/></marker>
+              </defs>
+              <g stroke="#E4EDF6" stroke-width="1">
+                <line x1="130" y1="34" x2="130" y2="250"/><line x1="190" y1="34" x2="190" y2="250"/>
+                <line x1="310" y1="34" x2="310" y2="250"/><line x1="370" y1="34" x2="370" y2="250"/>
+                <line x1="45" y1="90" x2="452" y2="90"/><line x1="45" y1="170" x2="452" y2="170"/>
+              </g>
+              <path d="M110 55 Q250 300 390 55 L390 250 L110 250 Z" fill="url(#mxGmath)"/>
+              <path d="M110 55 Q250 300 390 55" fill="none" stroke="#0E9EE6" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="250" y1="258" x2="250" y2="30" stroke="#9DB0C9" stroke-width="1.6" marker-end="url(#mxArrowA)"/>
+              <line x1="42" y1="250" x2="458" y2="250" stroke="#9DB0C9" stroke-width="1.6" marker-end="url(#mxArrowA)"/>
+              <circle cx="250" cy="178" r="5.5" fill="#0A2452"/>
+              <circle cx="329" cy="118" r="5" fill="#0E9EE6"/>
+              <text x="440" y="243" font-size="13" fill="#44566E" font-family="'IBM Plex Mono',monospace">x</text>
+              <text x="258" y="46" font-size="13" fill="#44566E" font-family="'IBM Plex Mono',monospace">y</text>
+              <text x="300" y="96" font-size="14" fill="#0A2452" font-family="'IBM Plex Mono',monospace" font-weight="600">y = x²</text>
+            </svg>
+            <figcaption>Quadratic function — the shape behind projectile paths, optimisation and area problems.</figcaption>
+          </figure>
+          <!-- Physics: simple harmonic motion -->
+          <figure class="graph-panel" data-graph-panel="physics">
+            <svg class="mx-graph" viewBox="0 0 480 290" role="img" aria-label="Simple harmonic motion — displacement versus time">
+              <defs>
+                <marker id="mxArrowB" markerWidth="9" markerHeight="9" refX="5" refY="4.5" orient="auto"><path d="M0 0 L7 4.5 L0 9 Z" fill="#9DB0C9"/></marker>
+              </defs>
+              <g stroke="#E4EDF6" stroke-width="1">
+                <line x1="115" y1="34" x2="115" y2="250"/><line x1="205" y1="34" x2="205" y2="250"/>
+                <line x1="295" y1="34" x2="295" y2="250"/><line x1="385" y1="34" x2="385" y2="250"/>
+                <line x1="45" y1="82" x2="452" y2="82"/><line x1="45" y1="218" x2="452" y2="218"/>
+              </g>
+              <line x1="115" y1="82" x2="360" y2="82" stroke="#BBD3E9" stroke-width="1.2" stroke-dasharray="4 5"/>
+              <path d="M70 150 C100 59 130 59 160 150 C190 241 220 241 250 150 C280 59 310 59 340 150 C370 241 400 241 430 150"
+                    fill="none" stroke="#1E63A8" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="60" y1="258" x2="60" y2="30" stroke="#9DB0C9" stroke-width="1.6" marker-end="url(#mxArrowB)"/>
+              <line x1="52" y1="150" x2="458" y2="150" stroke="#9DB0C9" stroke-width="1.6" marker-end="url(#mxArrowB)"/>
+              <circle cx="115" cy="82" r="5.5" fill="#0A2452"/>
+              <circle cx="205" cy="218" r="5" fill="#0E9EE6"/>
+              <text x="440" y="168" font-size="13" fill="#44566E" font-family="'IBM Plex Mono',monospace">t</text>
+              <text x="68" y="46" font-size="13" fill="#44566E" font-family="'IBM Plex Mono',monospace">x</text>
+              <text x="300" y="70" font-size="13.5" fill="#0A2452" font-family="'IBM Plex Mono',monospace" font-weight="600">x = A sin(ωt)</text>
+            </svg>
+            <figcaption>Simple harmonic motion — the wave behind sound, light, springs and oscillations.</figcaption>
+          </figure>
+        </div>
       </div>
     </div>
   </div>
@@ -228,7 +277,7 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
         <div class="quote-mark">&rdquo;</div>
         <div class="stars">★★★★★</div>
         <p>The small-group Maths class was perfect — six students, all at my level, and the tutor still knew exactly where each of us was struggling. Jumped two grade bands.</p>
-        <div class="testi-who"><div class="av">SO</div><div><div class="nm">IB Diploma student</div><div class="rl">Singapore</div></div></div>
+        <div class="testi-who"><div class="av">SO</div><div><div class="nm">IBDP student</div><div class="rl">Singapore</div></div></div>
       </div>
       <div class="testi-card">
         <div class="quote-mark">&rdquo;</div>
@@ -263,6 +312,43 @@ $sym = ['INR'=>'₹','USD'=>'$','GBP'=>'£','EUR'=>'€','AED'=>'AED '];
     </div>
   </div>
 </section>
+<?php endif; ?>
+
+<!-- ===================== FAQ ===================== -->
+<?php
+$faqItems = [];
+for ($i = 1; $i <= 6; $i++) {
+    $fq = trim((string) block('faq.q' . $i));
+    $fa = trim((string) block('faq.a' . $i));
+    if ($fq !== '' && $fa !== '') { $faqItems[] = ['q' => $fq, 'a' => $fa]; }
+}
+?>
+<?php if ($faqItems): ?>
+<section class="section alt">
+  <div class="wrap wrap-narrow">
+    <div class="section-head center">
+      <span class="pill-eyebrow"><?= e(block('faq.eyebrow')) ?></span>
+      <h2><?= e(block('faq.title')) ?></h2>
+    </div>
+    <div class="faq-list">
+      <?php foreach ($faqItems as $k => $f): ?>
+        <details class="faq-item"<?= $k === 0 ? ' open' : '' ?>>
+          <summary><span class="faq-q"><?= e($f['q']) ?></span><span class="faq-ico" aria-hidden="true"></span></summary>
+          <div class="faq-a"><p><?= e($f['a']) ?></p></div>
+        </details>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+<script type="application/ld+json" nonce="<?= e(csp_nonce()) ?>"><?= json_encode([
+  '@context'   => 'https://schema.org',
+  '@type'      => 'FAQPage',
+  'mainEntity' => array_map(fn($f) => [
+      '@type'          => 'Question',
+      'name'           => $f['q'],
+      'acceptedAnswer' => ['@type' => 'Answer', 'text' => $f['a']],
+  ], $faqItems),
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?></script>
 <?php endif; ?>
 
 <!-- ===================== CTA BANNER ===================== -->

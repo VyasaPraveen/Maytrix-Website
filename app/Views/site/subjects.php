@@ -30,10 +30,22 @@ foreach ($pages as $p) { $pagesBySubject[$p['subject_id']][] = $p; }
           <?php endforeach; ?>
         </div>
         <div class="card" style="margin-top:26px;">
-          <span class="tag"><?= e($s['name']) ?> — by curriculum</span>
-          <div class="grid-4" style="margin-top:14px;gap:10px;">
-            <?php foreach (($pagesBySubject[$s['id']] ?? []) as $p): ?>
-              <a href="<?= e(base_url('curriculum/' . $p['slug'])) ?>" class="btn btn-outline btn-sm" style="justify-content:center;"><?= e($p['eyebrow'] ? explode(' · ', $p['eyebrow'])[0] : $p['title']) ?></a>
+          <span class="tag"><?= e($s['name']) ?> — levels by curriculum</span>
+          <div class="level-grid" style="margin-top:16px;">
+            <?php foreach (($pagesBySubject[$s['id']] ?? []) as $p):
+                $curLabel = $p['eyebrow'] ? explode(' · ', $p['eyebrow'])[0] : $p['title'];
+                $levels = is_array($p['badges'] ?? null) ? $p['badges'] : [];
+            ?>
+              <a href="<?= e(base_url('curriculum/' . $p['slug'])) ?>" class="level-item">
+                <div class="level-head"><span class="level-curric"><?= e($curLabel) ?></span><span class="level-go" aria-hidden="true">→</span></div>
+                <?php if ($levels): ?>
+                  <div class="level-badges">
+                    <?php foreach ($levels as $b): ?><span><?= e($b) ?></span><?php endforeach; ?>
+                  </div>
+                <?php else: ?>
+                  <div class="level-badges muted-badges"><span>Levels on request</span></div>
+                <?php endif; ?>
+              </a>
             <?php endforeach; ?>
           </div>
         </div>

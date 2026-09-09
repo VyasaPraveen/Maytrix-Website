@@ -54,7 +54,7 @@ $orgLd = [
       $settings['social_linkedin'] ?? null,
   ])),
   'areaServed' => 'Worldwide',
-  'knowsAbout' => ['Mathematics', 'Physics', 'IB Diploma', 'Cambridge IGCSE', 'A Level'],
+  'knowsAbout' => ['Mathematics', 'Physics', 'IBDP', 'Cambridge IGCSE', 'A Level'],
 ];
 // Drop null / empty values so the emitted entity is clean (no telephone:null, sameAs:[]).
 $orgLd = array_filter($orgLd, fn($v) => $v !== null && $v !== '' && $v !== []);

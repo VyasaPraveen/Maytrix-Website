@@ -25,7 +25,7 @@ final class CurriculumPagesController extends ResourceController
                 ['name' => 'slug', 'label' => 'URL slug', 'type' => 'slug', 'from' => 'title', 'rules' => 'required|max:160', 'unique' => true, 'hint' => 'Appears in the URL: /curriculum/{slug}'],
                 ['name' => 'curriculum_id', 'label' => 'Curriculum', 'type' => 'select-int', 'options_key' => 'curricula', 'rules' => 'required'],
                 ['name' => 'subject_id', 'label' => 'Subject', 'type' => 'select-int', 'options_key' => 'subjects', 'rules' => 'required'],
-                ['name' => 'eyebrow', 'label' => 'Eyebrow', 'type' => 'text', 'rules' => 'max:160', 'placeholder' => 'e.g. IB Diploma · Mathematics'],
+                ['name' => 'eyebrow', 'label' => 'Eyebrow', 'type' => 'text', 'rules' => 'max:160', 'placeholder' => 'e.g. IBDP · Mathematics'],
                 ['name' => 'badges', 'label' => 'Badges (JSON array)', 'type' => 'json', 'hint' => 'e.g. ["AA HL","AA SL","AI HL"]'],
                 ['name' => 'intro', 'label' => 'Intro paragraph', 'type' => 'textarea', 'rules' => 'required'],
                 ['name' => 'topics', 'label' => 'Topics (JSON array of [title, description])', 'type' => 'json', 'placeholder' => '[["Functions & Algebra","Core techniques…"],["Calculus","Differentiation…"]]', 'hint' => 'Each item is a pair: [title, description]'],

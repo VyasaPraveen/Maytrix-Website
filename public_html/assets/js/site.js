@@ -51,34 +51,17 @@
       });
     });
 
-    /* ---------- hero worked example (home only) ---------- */
-    var workedBody = document.getElementById('workedBody');
-    if (workedBody) {
-      var workedData = {
-        math: {
-          q: 'Differentiate: y = 3x² − 5x + 7',
-          steps: ['dy/dx of each term, separately', 'd/dx(3x²) = 6x', 'd/dx(−5x) = −5,   d/dx(7) = 0'],
-          result: 'dy/dx = 6x − 5'
-        },
-        physics: {
-          q: 'A ball is thrown upward at 20 m/s. Find max height. (g = 10 m/s²)',
-          steps: ['Use v² = u² − 2gh, with v = 0 at max height', '0 = (20)² − 2(10)h', 'h = 400 ÷ 20'],
-          result: 'h = 20 m'
-        }
-      };
-      function renderWorked(key) {
-        var d = workedData[key];
-        var html = '<div class="q">' + d.q + '</div><ol class="worked-steps">';
-        d.steps.forEach(function (s, i) { html += '<li><span class="n">' + (i + 1) + '.</span> ' + s + '</li>'; });
-        html += '<li class="result">→ ' + d.result + '</li></ol>';
-        workedBody.innerHTML = html;
-      }
-      renderWorked('math');
-      document.querySelectorAll('[data-worked]').forEach(function (btn) {
+    /* ---------- home graphs toggle (Maths / Physics) ---------- */
+    var graphButtons = document.querySelectorAll('[data-graph]');
+    if (graphButtons.length) {
+      graphButtons.forEach(function (btn) {
         btn.addEventListener('click', function () {
-          document.querySelectorAll('[data-worked]').forEach(function (b) { b.classList.remove('active'); });
+          var key = btn.getAttribute('data-graph');
+          graphButtons.forEach(function (b) { b.classList.remove('active'); });
           btn.classList.add('active');
-          renderWorked(btn.getAttribute('data-worked'));
+          document.querySelectorAll('[data-graph-panel]').forEach(function (p) {
+            p.classList.toggle('active', p.getAttribute('data-graph-panel') === key);
+          });
         });
       });
     }
@@ -118,38 +101,87 @@
       counterEls.forEach(function (c) { counterObserver.observe(c); });
     }
 
-    /* ---------- booking wizard (book page) ---------- */
+    /* ---------- booking wizard: subject → level → details ---------- */
     var wizard = document.querySelector('.wizard');
     if (wizard) {
       var wizStep = 1;
-      var totalSteps = wizard.querySelectorAll('.wizard-step').length;
+      var steps = wizard.querySelectorAll('.wizard-step');
+      var totalSteps = steps.length;
+      var subjHidden = document.getElementById('wiz_subject_id');
+      var curricHidden = document.getElementById('wiz_curriculum_id');
+      var levelHidden = document.getElementById('wiz_level');
+      var guard = document.getElementById('wizGuard');
+
+      function showGuard(msg) {
+        if (!guard) return;
+        guard.textContent = msg;
+        guard.hidden = false;
+      }
+      function hideGuard() { if (guard) guard.hidden = true; }
+
+      // Show only the level set for the currently-chosen subject.
+      function syncLevelSets() {
+        var sid = subjHidden ? subjHidden.value : '';
+        wizard.querySelectorAll('.level-set').forEach(function (set) {
+          set.hidden = set.getAttribute('data-subject') !== sid;
+        });
+      }
       function refresh() {
         wizard.querySelectorAll('.wizard-progress i').forEach(function (i) {
           i.classList.toggle('done', parseInt(i.getAttribute('data-p')) <= wizStep);
         });
-        wizard.querySelectorAll('.wizard-step').forEach(function (s) {
+        steps.forEach(function (s) {
           s.classList.toggle('active', parseInt(s.getAttribute('data-step')) === wizStep);
         });
+        if (wizStep === 2) { syncLevelSets(); }
         var back = document.getElementById('wizBack');
         var next = document.getElementById('wizNext');
         back.style.visibility = wizStep === 1 ? 'hidden' : 'visible';
         next.textContent = wizStep === totalSteps ? 'Submit request' : 'Continue';
         next.setAttribute('type', wizStep === totalSteps ? 'submit' : 'button');
       }
+
+      // Single-select groups that map straight to a hidden field (subject_id, class_type…).
       wizard.querySelectorAll('.choice').forEach(function (btn) {
+        var grid = btn.parentElement;
+        var group = grid.getAttribute('data-choice-group');
+        if (!group) { return; } // level buttons handled below
         btn.addEventListener('click', function () {
-          var group = btn.parentElement.getAttribute('data-choice-group');
-          btn.parentElement.querySelectorAll('.choice').forEach(function (c) { c.classList.remove('selected'); });
+          grid.querySelectorAll('.choice').forEach(function (c) { c.classList.remove('selected'); });
           btn.classList.add('selected');
           var hidden = document.getElementById('wiz_' + group);
-          if (hidden) hidden.value = btn.getAttribute('data-value');
+          if (hidden) { hidden.value = btn.getAttribute('data-value'); }
+          if (group === 'subject_id') {
+            // Changing subject invalidates a previously-picked level.
+            if (curricHidden) { curricHidden.value = ''; }
+            if (levelHidden) { levelHidden.value = ''; }
+            wizard.querySelectorAll('.level-btn.selected').forEach(function (c) { c.classList.remove('selected'); });
+          }
+          hideGuard();
         });
       });
+
+      // Level buttons set BOTH curriculum + level, single-select across the subject set.
+      wizard.querySelectorAll('.level-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var set = btn.closest('.level-set');
+          if (set) { set.querySelectorAll('.level-btn').forEach(function (c) { c.classList.remove('selected'); }); }
+          btn.classList.add('selected');
+          if (curricHidden) { curricHidden.value = btn.getAttribute('data-curriculum'); }
+          if (levelHidden) { levelHidden.value = btn.getAttribute('data-level'); }
+          hideGuard();
+        });
+      });
+
       document.getElementById('wizNext').addEventListener('click', function (e) {
-        if (wizStep < totalSteps) { e.preventDefault(); wizStep++; refresh(); }
+        if (wizStep < totalSteps) {
+          if (wizStep === 1 && subjHidden && !subjHidden.value) { e.preventDefault(); showGuard('Please choose a subject to continue.'); return; }
+          if (wizStep === 2 && curricHidden && !curricHidden.value) { e.preventDefault(); showGuard('Please choose a level to continue.'); return; }
+          e.preventDefault(); hideGuard(); wizStep++; refresh();
+        }
       });
       document.getElementById('wizBack').addEventListener('click', function () {
-        if (wizStep > 1) { wizStep--; refresh(); }
+        if (wizStep > 1) { hideGuard(); wizStep--; refresh(); }
       });
       refresh();
     }

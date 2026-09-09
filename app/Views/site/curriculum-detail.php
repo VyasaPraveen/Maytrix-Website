@@ -2,7 +2,7 @@
 $badges = $page['badges'] ?? [];
 $topics = $page['topics'] ?? [];
 ?>
-<section class="page-hero">
+<section class="page-hero page-hero--plain">
   <div class="wrap" style="max-width:820px;">
     <div class="crumbs"><a href="<?= e(base_url()) ?>">Home</a><span>›</span> <a href="<?= e(base_url('programmes')) ?>">Courses</a><span>›</span> <?= e($page['title']) ?></div>
     <?php if (!empty($page['eyebrow'])): ?><span class="pill-eyebrow"><?= e($page['eyebrow']) ?></span><?php endif; ?>

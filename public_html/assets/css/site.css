@@ -660,3 +660,101 @@
   .mx-hero-ctas{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   .mx-hero-ctas .btn{width:100%;justify-content:center;text-align:center;}
 }
+
+/* ======================================================================
+   Additions — hero art, home graphs, FAQ, about cards/tutor,
+   subjects levels, contact methods, booking wizard extras
+   ====================================================================== */
+
+/* Inner-page header illustration (applies to every .page-hero) */
+.page-hero::after{
+  content:"";position:absolute;top:50%;transform:translateY(-50%);
+  right:max(16px, calc(50vw - 578px));
+  width:300px;height:220px;
+  background:url("../img/page-hero-art.svg") no-repeat center/contain;
+  opacity:.9;pointer-events:none;z-index:0;
+}
+.page-hero .crumbs,.page-hero .pill-eyebrow,.page-hero h1,.page-hero p{position:relative;z-index:1;}
+/* Keep hero text clear of the art; suppress art on centered / narrow-column heroes. */
+.page-hero:not(.page-hero--plain) h1{max-width:600px;}
+.page-hero--plain::after{display:none;}
+
+/* Home curricula card badges — full abbreviation (auto-sized pill) */
+.curr-card .badge-ico{
+  width:auto;height:auto;min-height:34px;padding:8px 14px;border-radius:11px;
+  font-size:12.5px;font-weight:800;letter-spacing:.03em;white-space:nowrap;align-self:flex-start;
+}
+
+/* Home graphs panel */
+.graph-card .worked-body{padding:16px 18px 20px;}
+.mx-graph{width:100%;height:auto;display:block;}
+.graph-panel{display:none;}
+.graph-panel.active{display:block;animation:mxFade .35s ease;}
+.graph-panel figcaption{margin-top:8px;font-size:13px;color:var(--ink-soft);line-height:1.55;}
+@keyframes mxFade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+@media (prefers-reduced-motion: reduce){.graph-panel.active{animation:none;}}
+
+/* FAQ accordion */
+.wrap-narrow{max-width:840px;}
+.faq-list{display:flex;flex-direction:column;gap:12px;margin-top:26px;}
+.faq-item{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:border-color .18s ease;}
+.faq-item[open]{border-color:#BFD5EC;}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 20px;font-weight:600;color:var(--navy);font-size:15.5px;}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-q{flex:1;}
+.faq-ico{position:relative;flex:0 0 18px;width:18px;height:18px;}
+.faq-ico::before,.faq-ico::after{content:"";position:absolute;background:var(--blue);border-radius:2px;transition:transform .2s ease;}
+.faq-ico::before{top:8px;left:1px;width:16px;height:2.6px;}
+.faq-ico::after{left:7.7px;top:1px;width:2.6px;height:16px;}
+.faq-item[open] .faq-ico::after{transform:scaleY(0);}
+.faq-item[open] summary{border-bottom:1px solid var(--line);}
+.faq-a{padding:16px 20px 18px;}
+.faq-a p{margin:0;font-size:14.5px;color:var(--ink-soft);line-height:1.65;}
+
+/* About — clickable cards + meet-your-tutor */
+.card-link{display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;}
+.card-link:hover{transform:translateY(-3px);box-shadow:var(--shadow-card);border-color:#BFD5EC;}
+.card-more{margin-top:auto;padding-top:12px;color:var(--blue-dark);font-weight:700;font-size:13px;}
+.tutor-card{display:grid;grid-template-columns:170px 1fr;gap:32px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:32px;max-width:840px;margin:0 auto;box-shadow:var(--shadow-card);}
+.tutor-photo{width:150px;height:150px;border-radius:50%;overflow:hidden;box-shadow:0 12px 28px -14px rgba(10,36,82,.5);}
+.tutor-photo svg{width:100%;height:100%;display:block;}
+.tutor-info h3{font-size:20px;margin:0 0 4px;}
+.tutor-role{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--blue-dark);text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px;}
+.tutor-info p{font-size:14.5px;margin-bottom:16px;}
+
+/* Subjects — levels by curriculum */
+.level-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+.level-item{display:block;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px;text-decoration:none;color:inherit;transition:border-color .18s,box-shadow .18s,transform .18s;}
+.level-item:hover{border-color:#BFD5EC;box-shadow:var(--shadow-card);transform:translateY(-2px);}
+.level-head{display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.level-curric{font-weight:700;color:var(--navy);font-size:15px;}
+.level-go{color:var(--blue-dark);font-weight:700;}
+.level-badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.level-badges span{font-family:'IBM Plex Mono',monospace;font-size:11.5px;border:1px solid var(--line);background:var(--card);padding:4px 9px;border-radius:20px;color:var(--ink-soft);}
+.level-badges.muted-badges span{font-style:italic;}
+
+/* Contact — direct methods with icons */
+.contact-methods{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:16px;}
+.contact-methods li{display:flex;align-items:center;gap:14px;}
+.cm-ico{flex:0 0 42px;width:42px;height:42px;border-radius:11px;display:inline-flex;align-items:center;justify-content:center;background:var(--sky);color:var(--blue-dark);}
+.cm-ico svg{width:20px;height:20px;}
+.cm-ico.wa{background:#E4F7EC;color:#1DAA52;}
+.cm-body{display:flex;flex-direction:column;min-width:0;}
+.cm-label{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);}
+.cm-body a{font-size:15px;color:var(--navy);font-weight:600;text-decoration:none;word-break:break-word;}
+.cm-body a:hover{color:var(--blue-dark);text-decoration:underline;}
+
+/* Booking wizard — new sublabels / hints / guard */
+.wiz-sublabel{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink-soft);margin:18px 0 10px;font-weight:600;}
+.wizard-step .wiz-sublabel:first-child{margin-top:0;}
+.wiz-hint{font-size:13px;color:var(--ink-soft);margin-top:16px;}
+.wiz-guard{color:var(--danger);font-size:13.5px;font-weight:600;margin:14px 0 0;}
+
+/* Responsive */
+@media (max-width:992px){
+  .page-hero::after{display:none;}
+}
+@media (max-width:760px){
+  .tutor-card{grid-template-columns:1fr;justify-items:center;text-align:center;gap:20px;padding:26px;}
+  .level-grid{grid-template-columns:1fr;}
+}

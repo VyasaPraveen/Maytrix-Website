@@ -45,10 +45,10 @@ return [
             // Steps
             'home.steps.eyebrow'    => ['label' => 'How-it-works — eyebrow', 'type' => 'text', 'default' => 'How it works'],
             'home.steps.title'      => ['label' => 'How-it-works — heading', 'type' => 'text', 'default' => 'From enquiry to your first class'],
-            // Worked example
-            'home.worked.eyebrow'   => ['label' => 'Worked example — eyebrow', 'type' => 'text', 'default' => 'See how we teach'],
-            'home.worked.title'     => ['label' => 'Worked example — heading', 'type' => 'text', 'default' => 'Every concept, broken down step by step'],
-            'home.worked.intro'     => ['label' => 'Worked example — intro', 'type' => 'textarea', 'default' => "We don't just give the answer — we show the method examiners want, one clear line at a time. Switch between a Maths and a Physics example."],
+            // Graphs (visual concept section)
+            'home.worked.eyebrow'   => ['label' => 'Graphs — eyebrow', 'type' => 'text', 'default' => 'Concepts, visualised'],
+            'home.worked.title'     => ['label' => 'Graphs — heading', 'type' => 'text', 'default' => 'Beautiful Maths & Physics, made visual'],
+            'home.worked.intro'     => ['label' => 'Graphs — intro', 'type' => 'textarea', 'default' => 'From quadratic curves to wave motion, we teach the intuition behind the graphs — not just the formulas. Switch between a Maths and a Physics example.'],
             // Testimonials
             'home.testi.eyebrow'    => ['label' => 'Testimonials — eyebrow', 'type' => 'text', 'default' => 'Parents & students'],
             'home.testi.title'      => ['label' => 'Testimonials — heading', 'type' => 'text', 'default' => 'Trusted by families around the world'],
@@ -70,6 +70,32 @@ return [
             'about.card2.body'  => ['label' => 'Card 2 — text', 'type' => 'textarea', 'default' => 'Group classes are capped at 6 students so every question still gets answered live.'],
             'about.card3.title' => ['label' => 'Card 3 — title', 'type' => 'text', 'default' => 'Built to grow with you'],
             'about.card3.body'  => ['label' => 'Card 3 — text', 'type' => 'textarea', 'default' => 'Starting as a focused tutoring brand, with a student portal and progress tracking planned as the next step.'],
+            // Meet your tutor
+            'about.tutor.eyebrow' => ['label' => 'Meet-your-tutor — eyebrow', 'type' => 'text', 'default' => 'Meet your tutor'],
+            'about.tutor.title'   => ['label' => 'Meet-your-tutor — heading', 'type' => 'text', 'default' => 'Taught by specialists, not generalists'],
+            'about.tutor.name'    => ['label' => 'Tutor — name', 'type' => 'text', 'default' => 'Maytrix Lead Tutor'],
+            'about.tutor.role'    => ['label' => 'Tutor — role / credentials', 'type' => 'text', 'default' => 'Mathematics & Physics · IBDP · IBMYP · IGCSE · AS & A Level'],
+            'about.tutor.bio'     => ['label' => 'Tutor — bio', 'type' => 'textarea', 'default' => 'Our lead tutors are subject specialists who teach Mathematics and Physics to international exam boards every week — with years of experience guiding students through IBDP, IBMYP, Cambridge IGCSE and AS & A Level to top grades. Every lesson is built around the exact mark scheme a student is sitting.'],
+        ],
+    ],
+
+    'faq' => [
+        'label' => 'Home FAQ',
+        'blocks' => [
+            'faq.eyebrow' => ['label' => 'FAQ — eyebrow', 'type' => 'text', 'default' => 'Questions & answers'],
+            'faq.title'   => ['label' => 'FAQ — heading', 'type' => 'text', 'default' => 'Frequently asked questions'],
+            'faq.q1' => ['label' => 'Q1 — question', 'type' => 'text', 'default' => 'How do payments and fees work?'],
+            'faq.a1' => ['label' => 'Q1 — answer', 'type' => 'textarea', 'default' => 'Fees are quoted per course or per month depending on the plan, and confirmed before your first paid class. We accept secure online payment and share a clear invoice for every payment — there are no hidden charges.'],
+            'faq.q2' => ['label' => 'Q2 — question', 'type' => 'text', 'default' => 'Is the first consultation really free?'],
+            'faq.a2' => ['label' => 'Q2 — answer', 'type' => 'textarea', 'default' => 'Yes. Your first consultation is completely free. We assess the syllabus, the current gap and the target grade, then recommend the right 1-to-1 or small-group plan — with no obligation to continue.'],
+            'faq.q3' => ['label' => 'Q3 — question', 'type' => 'text', 'default' => 'Which subjects and levels do you teach?'],
+            'faq.a3' => ['label' => 'Q3 — answer', 'type' => 'textarea', 'default' => 'We specialise in Mathematics and Physics only, across four boards — IBDP (HL & SL), IBMYP Year 4 & 5, Cambridge IGCSE and Cambridge AS & A Level — taught to each board’s exact syllabus and mark scheme.'],
+            'faq.q4' => ['label' => 'Q4 — question', 'type' => 'text', 'default' => 'Are classes 1-to-1 or in groups?'],
+            'faq.a4' => ['label' => 'Q4 — answer', 'type' => 'textarea', 'default' => 'Both. Choose focused 1-to-1 lessons at your own pace, or a small-group class capped at 6 students matched by curriculum and level. You can switch formats as your needs change.'],
+            'faq.q5' => ['label' => 'Q5 — question', 'type' => 'text', 'default' => 'How and where are classes held?'],
+            'faq.a5' => ['label' => 'Q5 — answer', 'type' => 'textarea', 'default' => 'Classes run live on Zoom with a shared whiteboard, and worked solutions, notes and recordings are shared after each session. Timings are scheduled around your own time zone — India, the Gulf, the UK and Europe.'],
+            'faq.q6' => ['label' => 'Q6 — question', 'type' => 'text', 'default' => 'What makes Maytrix Education different?'],
+            'faq.a6' => ['label' => 'Q6 — answer', 'type' => 'textarea', 'default' => 'We do two subjects, deeply. Every tutor teaches inside their own exam board every week, so lessons focus on the command words, technique and past-paper practice that actually earn marks — not generic tutoring.'],
         ],
     ],
 
@@ -98,11 +124,11 @@ return [
 
             'pages.contact.eyebrow'   => ['label' => 'Contact — eyebrow', 'type' => 'text', 'default' => 'Contact'],
             'pages.contact.title'     => ['label' => 'Contact — heading', 'type' => 'text', 'default' => 'Talk to us'],
-            'pages.contact.intro'     => ['label' => 'Contact — intro', 'type' => 'textarea', 'default' => "Have a question before booking a consultation? Send us a note and we'll reply within one business day."],
+            'pages.contact.intro'     => ['label' => 'Contact — intro', 'type' => 'textarea', 'default' => "Send us a message and we'll reply within one business day."],
 
             'pages.book.eyebrow'      => ['label' => 'Book — eyebrow', 'type' => 'text', 'default' => 'Book a Consultation'],
             'pages.book.title'        => ['label' => 'Book — heading', 'type' => 'text', 'default' => "Let's find the right class for you"],
-            'pages.book.intro'        => ['label' => 'Book — intro', 'type' => 'textarea', 'default' => 'A quick 3-step form — curriculum, subject & class type, then your details. Takes under a minute.'],
+            'pages.book.intro'        => ['label' => 'Book — intro', 'type' => 'textarea', 'default' => 'A quick 3-step form — subject, level, then your details. Takes under a minute.'],
         ],
     ],
 ];

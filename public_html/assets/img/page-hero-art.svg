@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none" role="img" aria-label="Mathematics and Physics motif">
+  <defs>
+    <linearGradient id="ph-curve" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#0E9EE6" stop-opacity=".25"/>
+      <stop offset="1" stop-color="#0E9EE6" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="ph-orb" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#41B4EE"/>
+      <stop offset="1" stop-color="#0A78BC"/>
+    </linearGradient>
+  </defs>
+  <!-- soft dotted field -->
+  <g fill="#1E63A8" opacity=".14">
+    <circle cx="40" cy="60" r="2.4"/><circle cx="70" cy="60" r="2.4"/><circle cx="100" cy="60" r="2.4"/>
+    <circle cx="40" cy="90" r="2.4"/><circle cx="70" cy="90" r="2.4"/><circle cx="100" cy="90" r="2.4"/>
+    <circle cx="40" cy="120" r="2.4"/><circle cx="70" cy="120" r="2.4"/><circle cx="100" cy="120" r="2.4"/>
+  </g>
+  <!-- graph curve with area -->
+  <path d="M30 250 C90 250 120 150 170 140 C220 130 250 70 320 60 L320 250 Z" fill="url(#ph-curve)"/>
+  <path d="M30 250 C90 250 120 150 170 140 C220 130 250 70 320 60" stroke="#0E9EE6" stroke-width="3" stroke-linecap="round"/>
+  <!-- atom / physics orbits -->
+  <g transform="translate(292 96)" stroke="#1E63A8" stroke-width="2" opacity=".55">
+    <ellipse cx="0" cy="0" rx="56" ry="22"/>
+    <ellipse cx="0" cy="0" rx="56" ry="22" transform="rotate(60)"/>
+    <ellipse cx="0" cy="0" rx="56" ry="22" transform="rotate(120)"/>
+  </g>
+  <circle cx="292" cy="96" r="16" fill="url(#ph-orb)"/>
+  <!-- formula tokens -->
+  <text x="150" y="70" font-size="26" fill="#0A2452" opacity=".85" font-family="Georgia, 'Times New Roman', serif" font-style="italic">∑</text>
+  <text x="40" y="200" font-size="20" fill="#1E63A8" opacity=".7" font-family="Georgia, 'Times New Roman', serif" font-style="italic">πr²</text>
+  <text x="196" y="212" font-size="19" fill="#0A78BC" opacity=".7" font-family="Georgia, 'Times New Roman', serif" font-style="italic">√x</text>
+  <!-- axis baseline -->
+  <line x1="24" y1="252" x2="340" y2="252" stroke="#BBD3E9" stroke-width="1.5"/>
+  <line x1="30" y1="258" x2="30" y2="46" stroke="#BBD3E9" stroke-width="1.5"/>
+</svg>

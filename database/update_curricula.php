@@ -53,7 +53,7 @@ $pages = [
     ],
     'curric-igcse-physics' => [
         'badges' => ['Physics (0625)'],
-        'intro'  => "Cambridge IGCSE Physics (0625) across the full syllabus, building strong practical and conceptual foundations that carry directly into AS & A Level or the IB Diploma.",
+        'intro'  => "Cambridge IGCSE Physics (0625) across the full syllabus, building strong practical and conceptual foundations that carry directly into AS & A Level or the IBDP.",
     ],
     'curric-alevel-math' => [
         'badges' => ['Mathematics (9709)', 'Further Mathematics (9231)'],

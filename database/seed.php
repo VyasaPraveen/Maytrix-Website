@@ -119,18 +119,18 @@ if ($isEmpty($web, 'modes')) {
 /* -------------------------- CURRICULUM PAGES -------------------------- */
 if ($isEmpty($web, 'curriculum_pages')) {
     $pages = [
-        ['curric-ibdp-math', 'ib_dp', 'math', 'IB Diploma · Mathematics', 'IB / IBDP Mathematics',
+        ['curric-ibdp-math', 'ib_dp', 'math', 'IBDP · Mathematics', 'IB / IBDP Mathematics',
             ['AA HL', 'AA SL', 'AI HL', 'AI SL'],
-            "Both IB Diploma Mathematics routes, at both levels — Analysis & Approaches (AA) for students headed toward pure maths, engineering or physical sciences, and Applications & Interpretation (AI) for students who want maths grounded in modelling and real-world data.",
+            "Both IBDP Mathematics routes, at both levels — Analysis & Approaches (AA) for students headed toward pure maths, engineering or physical sciences, and Applications & Interpretation (AI) for students who want maths grounded in modelling and real-world data.",
             [
                 ['Functions & Algebra', 'Core techniques through to AA-specific proof and AI-specific modelling approaches.'],
                 ['Calculus', 'Differentiation and integration, taught to the depth each route and level actually requires.'],
                 ['Statistics & Probability', "Distributions and inference, with AI's heavier data-analysis emphasis covered in full."],
                 ['Internal Assessment (IA)', 'One-to-one guidance on topic selection, exploration structure and the analytical write-up IB examiners expect.'],
             ]],
-        ['curric-ibdp-physics', 'ib_dp', 'physics', 'IB Diploma · Physics', 'IB / IBDP Physics',
+        ['curric-ibdp-physics', 'ib_dp', 'physics', 'IBDP · Physics', 'IB / IBDP Physics',
             ['HL', 'SL'],
-            "IB Diploma Physics at Higher and Standard Level, built around the IB's data-based and theory papers, practical scheme of work, and the analytical command terms examiners look for in every answer.",
+            "IBDP Physics at Higher and Standard Level, built around the IB's data-based and theory papers, practical scheme of work, and the analytical command terms examiners look for in every answer.",
             [
                 ['Mechanics & Thermal Physics', "Core HL/SL content, with HL's extended mechanics depth covered separately."],
                 ['Waves & Electricity', 'Wave behaviour, circuits and fields, mapped to Paper 1 and Paper 2 style questions.'],
@@ -166,7 +166,7 @@ if ($isEmpty($web, 'curriculum_pages')) {
             ]],
         ['curric-igcse-physics', 'igcse', 'physics', 'Cambridge IGCSE · Physics', 'Cambridge IGCSE Physics',
             ['Physics (0625)'],
-            "Cambridge IGCSE Physics (0625) across the full syllabus, building strong practical and conceptual foundations that carry directly into AS & A Level or the IB Diploma.",
+            "Cambridge IGCSE Physics (0625) across the full syllabus, building strong practical and conceptual foundations that carry directly into AS & A Level or the IBDP.",
             [
                 ['Forces & Motion', "Core mechanics, built for Cambridge's specific practical-paper expectations."],
                 ['Waves, Light & Sound', 'Core wave behaviour topics with plenty of diagram-based practice.'],
